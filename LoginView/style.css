@@ -1,0 +1,128 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins';
+}
+
+body {
+    height: 100vh;
+    background: linear-gradient(135deg, #0052D4, #4364F7, #6FB1FC);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px; 
+}
+
+/* Container menyesuaikan semua device */
+.container {
+    width: 100%;
+    max-width: 420px; 
+    display: flex;
+    justify-content: center;
+}
+
+/* Kartu login responsif */
+.login-card {
+    width: 100%;
+    padding: clamp(25px, 5vw, 40px);
+    border-radius: 20px;
+    backdrop-filter: blur(14px);
+    background: rgba(255, 255, 255, 0.12);
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.25);
+    text-align: center;
+    animation: fadeIn 0.8s ease;
+}
+
+.login-card h2 {
+    font-size: clamp(24px, 5vw, 34px);
+    font-weight: 600;
+    color: #fff;
+}
+
+.subtitle {
+    color: #e2e2e2;
+    margin-bottom: 20px;
+    font-size: clamp(12px, 3vw, 15px);
+}
+
+/* Input responsif */
+.input-group {
+    text-align: left;
+    margin-top: 15px;
+}
+
+.input-group label {
+    color: #fff;
+    font-size: clamp(12px, 3vw, 14px);
+}
+
+.input-group input {
+    width: 100%;
+    padding: clamp(10px, 3vw, 14px);
+    margin-top: 6px;
+    border-radius: 10px;
+    border: none;
+    outline: none;
+    background: rgba(255, 255, 255, 0.25);
+    color: #fff;
+    font-size: clamp(12px, 3vw, 15px);
+}
+
+/* Tombol responsif */
+.btn-login {
+    width: 100%;
+    margin-top: 25px;
+    padding: clamp(10px, 3vw, 14px);
+    border: none;
+    border-radius: 10px;
+    background: #ffffff;
+    color: #0052D4;
+    cursor: pointer;
+    font-size: clamp(14px, 3vw, 17px);
+    font-weight: 600;
+    transition: 0.3s;
+}
+
+.btn-login:hover {
+    background: #e6e6e6;
+}
+
+.footer {
+    margin-top: 20px;
+    color: #f0f0f0;
+    font-size: clamp(10px, 3vw, 13px);
+}
+
+/* Animasi */
+@keyframes fadeIn {
+    from {opacity: 0; transform: translateY(-20px);}
+    to {opacity: 1; transform: translateY(0);}
+}
+
+/* =============================
+   RESPONSIVE BREAKPOINTS
+============================= */
+
+/* Tablet */
+@media (min-width: 600px) {
+    .login-card {
+        max-width: 430px;
+    }
+}
+
+/* Laptop */
+@media (min-width: 900px) {
+    .login-card {
+        max-width: 450px;
+    }
+}
+
+/* Monitor Besar */
+@media (min-width: 1200px) {
+    .container {
+        max-width: 500px;
+    }
+}
