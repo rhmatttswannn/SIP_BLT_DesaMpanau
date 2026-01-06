@@ -48,6 +48,22 @@ body {
     font-size: clamp(12px, 3vw, 15px);
 }
 
+/* Logo */
+.logo {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 15px;
+}
+
+.logo img {
+    width: clamp(70px, 20vw, 110px);
+    height: auto;
+    object-fit: contain;
+    filter: drop-shadow(0 4px 8px rgba(0,0,0,0.3));
+}
+
+
+
 /* Input responsif */
 .input-group {
     text-align: left;
