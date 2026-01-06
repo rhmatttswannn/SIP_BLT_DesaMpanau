@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard Admin • SIP BLT</title>
+    <link rel="stylesheet" href="dashboard.css">
+</head>
+<body>
+
+<!-- SIDEBAR -->
+<aside class="sidebar">
+    <div class="sidebar-header">
+        <img src="assets/img/logo.png" alt="Logo">
+        <h3>SIP BLT</h3>
+    </div>
+
+    <ul class="menu">
+        <li class="active">Dashboard</li>
+        <li>Data Warga</li>
+        <li>Data BLT</li>
+        <li>Laporan</li>
+        <li>Pengaturan</li>
+        <li class="logout">Logout</li>
+    </ul>
+</aside>
+
+<!-- MAIN CONTENT -->
+<div class="main">
+
+    <!-- NAVBAR -->
+    <nav class="navbar">
+        <span class="menu-toggle">&#9776;</span>
+        <h4>Dashboard Admin</h4>
+        <div class="profile">
+            <span>Admin</span>
+        </div>
+    </nav>
+
+    <!-- CONTENT -->
+    <section class="content">
+
+        <!-- STAT CARDS -->
+        <div class="cards">
+            <div class="card">
+                <h5>Total Warga</h5>
+                <p>120</p>
+            </div>
+            <div class="card">
+                <h5>Penerima BLT</h5>
+                <p>85</p>
+            </div>
+            <div class="card">
+                <h5>Belum Terverifikasi</h5>
+                <p>35</p>
+            </div>
+        </div>
+
+        <!-- TABLE -->
+        <div class="table-box">
+            <h4>Data Terbaru</h4>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Nama</th>
+                        <th>NIK</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Ahmad</td>
+                        <td>7201********</td>
+                        <td class="success">Penerima</td>
+                    </tr>
+                    <tr>
+                        <td>Siti</td>
+                        <td>7201********</td>
+                        <td class="warning">Menunggu</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+    </section>
+</div>
+
+<script src="dashboard.js"></script>
+</body>
+</html>
