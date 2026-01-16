@@ -1,10 +1,12 @@
+// SIDEBAR TOGGLE
 const toggle = document.querySelector('.menu-toggle');
 const sidebar = document.querySelector('.sidebar');
 
-toggle.addEventListener('click', () => {
+toggle.onclick = () => {
     sidebar.classList.toggle('active');
-});
+};
 
+// CHART MODERN MINIMALIS
 const ctx = document.getElementById('bltChart');
 
 if (ctx) {
@@ -13,25 +15,24 @@ if (ctx) {
         data: {
             labels: ['Penerima', 'Belum Verifikasi'],
             datasets: [{
-                label: 'Jumlah Warga',
                 data: [85, 35],
-                backgroundColor: [
-                    '#0052D4',
-                    '#FFA500'
-                ],
-                borderRadius: 8
+                backgroundColor: ['#0EA5A4', '#E5E7EB'],
+                borderRadius: 14,
+                barThickness: 50
             }]
         },
         options: {
             responsive: true,
             plugins: {
-                legend: {
-                    display: false
-                }
+                legend: { display: false }
             },
             scales: {
+                x: {
+                    grid: { display: false },
+                    ticks: { color: '#64748B' }
+                },
                 y: {
-                    beginAtZero: true
+                    display: false
                 }
             }
         }
