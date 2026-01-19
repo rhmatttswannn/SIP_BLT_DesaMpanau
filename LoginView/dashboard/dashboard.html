@@ -4,6 +4,16 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dashboard Admin • SIP BLT</title>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+
+    <!-- Google Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- Chart JS -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
     <link rel="stylesheet" href="dashboard.css">
 </head>
 <body>
@@ -15,17 +25,36 @@
         <h3>SIP BLT</h3>
     </div>
 
-    <ul class="menu">
-        <li class="active">Dashboard</li>
-        <li>Data Warga</li>
-        <li>Data BLT</li>
-        <li>Laporan</li>
-        <li>Pengaturan</li>
-        <li class="logout">Logout</li>
-    </ul>
+<ul class="menu">
+    <li onclick="loadPage('dashboard-home.html')" class="active">
+    <i class="fa-solid fa-chart-line"></i>
+    <span>Dashboard</span>
+</li>
+<li onclick="loadPage('warga/warga.html')">
+    <i class="fa-solid fa-users"></i>
+    <span>Data Warga</span>
+</li>
+    <li onclick="loadPage('data-blt/data-blt.html')">
+        <i class="fa-solid fa-hand-holding-dollar"></i>
+        <span>Data BLT</span>
+    </li>
+    <li>
+        <i class="fa-solid fa-file-lines"></i>
+        <span>Laporan</span>
+    </li>
+    <li>
+        <i class="fa-solid fa-gear"></i>
+        <span>Pengaturan</span>
+    </li>
+    <li class="logout">
+        <i class="fa-solid fa-right-from-bracket"></i>
+        <span>Logout</span>
+    </li>
+</ul>
+
 </aside>
 
-<!-- MAIN CONTENT -->
+<!-- MAIN -->
 <div class="main">
 
     <!-- NAVBAR -->
@@ -38,51 +67,17 @@
     </nav>
 
     <!-- CONTENT -->
-    <section class="content">
+<section class="content">
 
-        <!-- STAT CARDS -->
-        <div class="cards">
-            <div class="card">
-                <h5>Total Warga</h5>
-                <p>120</p>
-            </div>
-            <div class="card">
-                <h5>Penerima BLT</h5>
-                <p>85</p>
-            </div>
-            <div class="card">
-                <h5>Belum Terverifikasi</h5>
-                <p>35</p>
-            </div>
-        </div>
+    <!-- IFRAME CONTENT -->
+    <iframe 
+        id="contentFrame"
+        src="dashboard-home.html"
+        frameborder="0">
+    </iframe>
 
-        <!-- TABLE -->
-        <div class="table-box">
-            <h4>Data Terbaru</h4>
-            <table>
-                <thead>
-                    <tr>
-                        <th>Nama</th>
-                        <th>NIK</th>
-                        <th>Status</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>Ahmad</td>
-                        <td>7201********</td>
-                        <td class="success">Penerima</td>
-                    </tr>
-                    <tr>
-                        <td>Siti</td>
-                        <td>7201********</td>
-                        <td class="warning">Menunggu</td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
+</section>
 
-    </section>
 </div>
 
 <script src="dashboard.js"></script>

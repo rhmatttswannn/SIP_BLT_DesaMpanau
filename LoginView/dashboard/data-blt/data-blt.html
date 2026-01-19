@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <title>Data BLT • SIP BLT</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="data-blt.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+</head>
+<body>
+
+<div class="container">
+
+    <!-- FORM INPUT BLT -->
+    <div class="form-box sticky-form">
+        <h4>Input Data BLT</h4>
+        <form id="bltForm">
+            <input type="text" id="nama" placeholder="Nama Warga" required>
+            <input type="text" id="nik" placeholder="NIK" required>
+            <input type="number" id="nominal" placeholder="Nominal BLT" required>
+            <select id="status">
+                <option value="Menunggu">Menunggu</option>
+                <option value="Disetujui">Disetujui</option>
+                <option value="Ditolak">Ditolak</option>
+            </select>
+            <button type="submit">
+                <i class="fa fa-save"></i> Simpan
+            </button>
+        </form>
+    </div>
+
+    <!-- TABLE -->
+    <div class="table-wrapper">
+        <div class="table-box">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Nama</th>
+                        <th>NIK</th>
+                        <th>Nominal</th>
+                        <th>Status</th>
+                        <th>Aksi</th>
+                    </tr>
+                </thead>
+                <tbody id="bltTable"></tbody>
+            </table>
+        </div>
+    </div>
+
+</div>
+
+<script src="data-blt.js"></script>
+</body>
+</html>
