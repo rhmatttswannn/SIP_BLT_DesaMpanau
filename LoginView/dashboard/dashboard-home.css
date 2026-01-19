@@ -1,0 +1,93 @@
+* {
+    box-sizing: border-box;
+    font-family: 'Inter', sans-serif;
+}
+
+body {
+    background: #F8FAFC;
+    padding: 20px;
+    color: #334155;
+}
+
+/* CARDS */
+.cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 20px;
+}
+
+.card {
+    padding: 20px;
+    border-radius: 16px;
+    color: white;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.08);
+}
+
+.card h5 {
+    font-weight: 500;
+    opacity: 0.9;
+}
+
+.card p {
+    font-size: 34px;
+    font-weight: 700;
+    margin-top: 8px;
+}
+
+.card-blue {
+    background: linear-gradient(135deg, #1E3A8A, #3B82F6);
+}
+
+.card-teal {
+    background: linear-gradient(135deg, #0EA5A4, #2DD4BF);
+}
+
+.card-orange {
+    background: linear-gradient(135deg, #F59E0B, #FBBF24);
+}
+
+/* CHART */
+.chart-box {
+    background: #ffffff;
+    margin-top: 30px;
+    padding: 20px;
+    border-radius: 16px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.08);
+    border-left: 5px solid #0EA5A4;
+}
+
+/* TABLE */
+.table-box {
+    background: #ffffff;
+    margin-top: 30px;
+    padding: 20px;
+    border-radius: 16px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.08);
+    border-left: 5px solid #F59E0B;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+th {
+    text-align: left;
+    color: #64748B;
+    font-weight: 500;
+}
+
+td {
+    padding: 12px 0;
+    border-bottom: 1px solid #F1F5F9;
+}
+
+.success {
+    color: #16A34A;
+    font-weight: 600;
+}
+
+.warning {
+    color: #D97706;
+    font-weight: 600;
+}

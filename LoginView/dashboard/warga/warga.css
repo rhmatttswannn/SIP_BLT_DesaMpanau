@@ -1,0 +1,168 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Inter', sans-serif;
+}
+
+body {
+    background: #F8FAFC;
+    color: #334155;
+}
+
+/* ===== CONTAINER ===== */
+.container {
+    padding: 24px;
+    max-width: 100%;
+}
+
+/* ===== FORM BOX (STICKY) ===== */
+.form-box {
+    background: #ffffff;
+    padding: 20px;
+    border-radius: 16px;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.06);
+    margin-bottom: 20px;
+}
+
+.form-box h4 {
+    margin-bottom: 12px;
+    font-weight: 600;
+}
+
+.sticky-form {
+    position: sticky;
+    top: 20px;
+    z-index: 50;
+}
+
+/* ===== FORM ===== */
+form {
+    display: flex;
+    gap: 12px;
+}
+
+input {
+    flex: 1;
+    padding: 12px 14px;
+    border-radius: 12px;
+    border: 1px solid #CBD5E1;
+    font-size: 14px;
+    outline: none;
+}
+
+input:focus {
+    border-color: #2563EB;
+}
+
+button {
+    background: linear-gradient(135deg, #1E3A8A, #2563EB);
+    color: white;
+    border: none;
+    border-radius: 12px;
+    padding: 12px 18px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+button:hover {
+    opacity: 0.9;
+}
+
+/* ===== TABLE AREA ===== */
+.table-wrapper {
+    max-height: 55vh;
+    overflow-y: auto;
+}
+
+.table-box {
+    background: #ffffff;
+    border-radius: 16px;
+    padding: 18px;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.06);
+}
+
+/* ===== TABLE ===== */
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+thead {
+    border-bottom: 1px solid #E5E7EB;
+}
+
+th {
+    text-align: left;
+    font-size: 13px;
+    color: #64748B;
+    padding-bottom: 12px;
+}
+
+td {
+    padding: 14px 0;
+    font-size: 14px;
+    border-bottom: 1px solid #F1F5F9;
+}
+/* ===== TABLE HEADER STICKY ===== */
+thead th {
+    position: sticky;
+    top: 0;
+    background: #ffffff;
+    z-index: 10;
+    box-shadow: 0 2px 0 #E5E7EB;
+}
+
+
+tbody tr:hover {
+    background: #F8FAFC;
+}
+
+/* ===== STATUS & TOKEN ===== */
+.token {
+    font-family: monospace;
+    color: #0EA5A4;
+    font-size: 13px;
+}
+
+.status {
+    font-weight: 600;
+}
+
+.active {
+    color: #16A34A;
+}
+
+/* ===== PAGINATION ===== */
+.pagination {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin: 25px 0;
+}
+
+.pagination button {
+    padding: 8px 14px;
+    border-radius: 10px;
+    border: none;
+    background: #E5E7EB;
+    cursor: pointer;
+    font-weight: 500;
+}
+
+.pagination button.active {
+    background: #1E3A8A;
+    color: white;
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 768px) {
+    form {
+        flex-direction: column;
+    }
+
+    button {
+        width: 100%;
+    }
+}

@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <title>Data Warga • SIP BLT</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="warga.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+</head>
+<body>
+
+<!-- HEADER STICKY -->
+
+<div class="container">
+
+
+    <!-- FORM STAY -->
+    <div class="form-box sticky-form">
+        <h4>Tambah Warga</h4>
+        <form id="wargaForm">
+            <input type="text" id="nama" placeholder="Nama Warga" required>
+            <input type="text" id="nik" placeholder="NIK" required>
+            <button type="submit">Generate Token</button>
+        </form>
+    </div>
+
+    <!-- TABLE SCROLL -->
+    <div class="table-wrapper">
+        <div class="table-box">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Nama</th>
+                        <th>NIK</th>
+                        <th>Token</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+                <tbody id="wargaTable"></tbody>
+            </table>
+        </div>
+    </div>
+
+    <div class="pagination" id="pagination"></div>
+</div>
+
+
+<script src="warga.js"></script>
+</body>
+</html>

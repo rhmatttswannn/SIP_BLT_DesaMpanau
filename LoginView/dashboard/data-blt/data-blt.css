@@ -1,0 +1,90 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap');
+
+* {
+    box-sizing: border-box;
+    font-family: 'Inter', sans-serif;
+}
+
+body {
+    background: #F8FAFC;
+    margin: 0;
+    color: #334155;
+}
+
+.container {
+    padding: 24px;
+}
+
+/* FORM */
+.form-box {
+    background: white;
+    padding: 20px;
+    border-radius: 16px;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.06);
+    margin-bottom: 20px;
+}
+
+.sticky-form {
+    position: sticky;
+    top: 20px;
+    z-index: 50;
+}
+
+form {
+    display: flex;
+    gap: 10px;
+}
+
+input, select {
+    padding: 12px;
+    border-radius: 12px;
+    border: 1px solid #CBD5E1;
+    flex: 1;
+}
+
+button {
+    background: linear-gradient(135deg, #2563EB, #1E3A8A);
+    color: white;
+    border: none;
+    padding: 12px 18px;
+    border-radius: 12px;
+    cursor: pointer;
+}
+
+/* TABLE */
+.table-wrapper {
+    max-height: 55vh;
+    overflow-y: auto;
+}
+
+.table-box {
+    background: white;
+    padding: 16px;
+    border-radius: 16px;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.06);
+}
+
+thead th {
+    position: sticky;
+    top: 0;
+    background: white;
+    z-index: 10;
+}
+
+td {
+    padding: 12px 0;
+    border-bottom: 1px solid #F1F5F9;
+}
+
+.status {
+    font-weight: 600;
+}
+
+.Disetujui { color: #16A34A; }
+.Menunggu { color: #D97706; }
+.Ditolak { color: #DC2626; }
+
+.actions i {
+    cursor: pointer;
+    margin-right: 10px;
+}

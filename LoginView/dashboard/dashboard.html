@@ -26,15 +26,15 @@
     </div>
 
 <ul class="menu">
-    <li class="active">
-        <i class="fa-solid fa-chart-line"></i>
-        <span>Dashboard</span>
-    </li>
-    <li>
-        <i class="fa-solid fa-users"></i>
-        <span>Data Warga</span>
-    </li>
-    <li>
+    <li onclick="loadPage('dashboard-home.html')" class="active">
+    <i class="fa-solid fa-chart-line"></i>
+    <span>Dashboard</span>
+</li>
+<li onclick="loadPage('warga/warga.html')">
+    <i class="fa-solid fa-users"></i>
+    <span>Data Warga</span>
+</li>
+    <li onclick="loadPage('data-blt/data-blt.html')">
         <i class="fa-solid fa-hand-holding-dollar"></i>
         <span>Data BLT</span>
     </li>
@@ -67,57 +67,17 @@
     </nav>
 
     <!-- CONTENT -->
-    <section class="content">
+<section class="content">
 
-        <!-- STAT CARDS -->
-        <div class="cards">
-            <div class="card card-blue">
-                <h5>Total Warga</h5>
-                <p>120</p>
-            </div>
-            <div class="card card-teal">
-                <h5>Penerima BLT</h5>
-                <p>85</p>
-            </div>
-            <div class="card card-orange">
-                <h5>Belum Terverifikasi</h5>
-                <p>35</p>
-            </div>
-        </div>
+    <!-- IFRAME CONTENT -->
+    <iframe 
+        id="contentFrame"
+        src="dashboard-home.html"
+        frameborder="0">
+    </iframe>
 
-        <!-- CHART -->
-        <div class="chart-box">
-            <h4>Grafik Distribusi BLT</h4>
-            <canvas id="bltChart"></canvas>
-        </div>
+</section>
 
-        <!-- TABLE -->
-        <div class="table-box">
-            <h4>Data Terbaru</h4>
-            <table>
-                <thead>
-                    <tr>
-                        <th>Nama</th>
-                        <th>NIK</th>
-                        <th>Status</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>Ahmad</td>
-                        <td>7201********</td>
-                        <td class="success">Penerima</td>
-                    </tr>
-                    <tr>
-                        <td>Siti</td>
-                        <td>7201********</td>
-                        <td class="warning">Menunggu</td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
-
-    </section>
 </div>
 
 <script src="dashboard.js"></script>

@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <title>Dashboard Home</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" href="dashboard-home.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+
+<div class="cards">
+    <div class="card card-blue">
+        <h5>Total Warga</h5>
+        <p>120</p>
+    </div>
+    <div class="card card-teal">
+        <h5>Penerima BLT</h5>
+        <p>85</p>
+    </div>
+    <div class="card card-orange">
+        <h5>Belum Terverifikasi</h5>
+        <p>35</p>
+    </div>
+</div>
+
+<div class="chart-box">
+    <h4>Grafik Distribusi BLT</h4>
+    <canvas id="bltChart" height="120"></canvas>
+</div>
+
+<div class="table-box">
+    <h4>Data Terbaru</h4>
+    <table>
+        <thead>
+            <tr>
+                <th>Nama</th>
+                <th>NIK</th>
+                <th>Status</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Ahmad</td>
+                <td>7201********</td>
+                <td class="success">Penerima</td>
+            </tr>
+            <tr>
+                <td>Siti</td>
+                <td>7201********</td>
+                <td class="warning">Menunggu</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<script>
+const ctx = document.getElementById('bltChart');
+
+new Chart(ctx, {
+    type: 'bar',
+    data: {
+        labels: ['Total Warga', 'Penerima BLT', 'Belum Terverifikasi'],
+        datasets: [{
+            label: 'Jumlah Warga',
+            data: [120, 85, 35],
+            backgroundColor: [
+                '#3B82F6',
+                '#0EA5A4',
+                '#F59E0B'
+            ],
+            borderRadius: 8,
+            barThickness: 40
+        }]
+    },
+    options: {
+        responsive: true,
+        plugins: {
+            legend: {
+                display: false
+            }
+        },
+        scales: {
+            y: {
+                beginAtZero: true,
+                grid: {
+                    color: '#E5E7EB'
+                }
+            },
+            x: {
+                grid: {
+                    display: false
+                }
+            }
+        }
+    }
+});
+</script>
+
+
+</body>
+</html>
