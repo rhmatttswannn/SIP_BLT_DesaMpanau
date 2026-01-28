@@ -26,23 +26,23 @@
     </div>
 
 <ul class="menu">
-    <li onclick="loadPage('dashboard-home.html')" class="active">
+    <li onclick="loadPage('dashboard-home.html', this)" class="active">
     <i class="fa-solid fa-chart-line"></i>
     <span>Dashboard</span>
 </li>
-<li onclick="loadPage('warga/warga.html')">
+<li onclick="loadPage('warga/warga.html', this)">
     <i class="fa-solid fa-users"></i>
     <span>Data Warga</span>
 </li>
-    <li onclick="loadPage('data-blt/data-blt.html')">
+    <li onclick="loadPage('data-blt/data-blt.html', this)">
         <i class="fa-solid fa-hand-holding-dollar"></i>
         <span>Data BLT</span>
     </li>
-    <li onclick="loadPage('laporan/laporan.html')">
+    <li onclick="loadPage('laporan/laporan.html',)">
         <i class="fa-solid fa-file-lines"></i>
         <span>Laporan</span>
     </li>
-    <li class="logout">
+    <li class="logout" onclick="logout()">
         <i class="fa-solid fa-right-from-bracket"></i>
         <span>Logout</span>
     </li>
