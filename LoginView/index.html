@@ -8,33 +8,54 @@
 </head>
 <body>
 
-    <div class="container">
+<div class="wrapper">
+
+    <!-- LANDING LEFT -->
+    <div class="landing">
+        <h1>Sistem Informasi Pendataan BTL</h1>
+        <p>
+            Sistem Informasi Pendataan BTL adalah aplikasi resmi yang digunakan
+            untuk mendukung proses pendataan, pengelolaan, dan pemantauan
+            Bantuan Tunai Langsung secara terstruktur, akurat, dan transparan.
+        </p>
+
+        <ul>
+            <li>✔ Pendataan penerima bantuan</li>
+            <li>✔ Pengelolaan data terpusat</li>
+            <li>✔ Monitoring dan validasi</li>
+            <li>✔ Transparan dan akuntabel</li>
+        </ul>
+    </div>
+
+    <!-- LOGIN RIGHT -->
+    <div class="login-container">
         <div class="login-card">
 
-             
             <div class="logo">
-                <img src="assets/img/logo.png" alt="Logo SIP BLT">
+                <img src="assets/img/logo.png" alt="Logo SIP BTL">
             </div>
-            <!-- <h2>SIP BTL</h2> -->
-            <p class="subtitle">Sistem Informasi Pendataan BTL</p>
+
+            <p class="subtitle">Masuk ke Sistem</p>
 
             <form id="loginForm">
-                <div class="input-group">
-                    <label>Username</label>
+                <div class="input-group floating">
                     <input type="text" id="username" required>
+                    <label>Username</label>
                 </div>
 
-                <div class="input-group">
-                    <label>Password</label>
+                <div class="input-group floating">
                     <input type="password" id="password" required>
+                    <label>Password</label>
                 </div>
 
                 <button type="submit" class="btn-login">Masuk</button>
             </form>
 
-            <p class="footer">© 2025 Sistem Informasi Pendataan BTL</p>
+            <p id="errorMsg"></p>
         </div>
     </div>
+
+</div>
 
 <script src="script.js"></script>
 </body>

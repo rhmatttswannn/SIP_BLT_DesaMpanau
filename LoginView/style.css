@@ -1,144 +1,204 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
 
+/* ================= ROOT COLOR ================= */
+:root {
+    --maroon-primary: #7b1e1e;
+    --maroon-light: #a52a2a;
+    --maroon-soft: #fdecea;
+    --white: #ffffff;
+    --gray: #555;
+}
+
+/* ================= RESET ================= */
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: 'Poppins';
+    font-family: 'Poppins', sans-serif;
 }
 
+/* ================= BODY ================= */
 body {
-    height: 100vh;
-    background: linear-gradient(135deg, #0052D4, #4364F7, #6FB1FC);
+    min-height: 100vh;
+    background: linear-gradient(120deg, var(--maroon-soft), #ffffff);
+}
+
+/* ================= WRAPPER ================= */
+.wrapper {
+    min-height: 100vh;
+    display: flex;
+}
+
+/* ================= LANDING ================= */
+.landing {
+    flex: 1.2;
+    padding: 90px;
+    background: linear-gradient(
+        135deg,
+        var(--maroon-primary),
+        var(--maroon-light)
+    );
+    color: var(--white);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.landing h1 {
+    font-size: 38px;
+    font-weight: 600;
+    margin-bottom: 20px;
+}
+
+.landing p {
+    font-size: 15px;
+    line-height: 1.8;
+    max-width: 520px;
+    opacity: 0.95;
+}
+
+.landing ul {
+    margin-top: 25px;
+    list-style: none;
+}
+
+.landing li {
+    margin-bottom: 12px;
+    font-size: 14px;
+}
+
+/* ================= LOGIN ================= */
+.login-container {
+    flex: 0.8;
+    background: var(--white);
     display: flex;
     justify-content: center;
     align-items: center;
-    padding: 20px; 
 }
 
-/* Container menyesuaikan semua device */
-.container {
-    width: 100%;
-    max-width: 420px; 
-    display: flex;
-    justify-content: center;
-}
-
-/* Kartu login responsif */
 .login-card {
     width: 100%;
-    padding: clamp(25px, 5vw, 40px);
-    border-radius: 20px;
-    backdrop-filter: blur(14px);
-    background: rgba(255, 255, 255, 0.12);
-    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.25);
-    text-align: center;
-    animation: fadeIn 0.8s ease;
+    max-width: 340px;
+    padding: 35px;
+    border-radius: 18px;
+    background: var(--white);
+    box-shadow: 0 15px 35px rgba(0,0,0,0.15);
+    animation: slideFade 0.9s ease;
 }
 
-.login-card h2 {
-    font-size: clamp(24px, 5vw, 34px);
-    font-weight: 600;
-    color: #fff;
-}
-
-.subtitle {
-    color: #e2e2e2;
-    margin-bottom: 20px;
-    font-size: clamp(12px, 3vw, 15px);
-}
-
-/* Logo */
+/* ================= LOGO ================= */
 .logo {
-    display: flex;
-    justify-content: center;
-    margin-bottom: 15px;
+    text-align: center;
+    margin-bottom: 12px;
 }
 
 .logo img {
-    width: clamp(70px, 20vw, 110px);
-    height: auto;
-    object-fit: contain;
-    filter: drop-shadow(0 4px 8px rgba(0,0,0,0.3));
+    width: 75px;
 }
 
+.subtitle {
+    text-align: center;
+    color: var(--gray);
+    font-size: 14px;
+    margin-bottom: 25px;
+}
 
-
-/* Input responsif */
+/* ================= INPUT ================= */
 .input-group {
-    text-align: left;
-    margin-top: 15px;
-}
-
-.input-group label {
-    color: #fff;
-    font-size: clamp(12px, 3vw, 14px);
+    position: relative;
+    margin-bottom: 22px;
 }
 
 .input-group input {
     width: 100%;
-    padding: clamp(10px, 3vw, 14px);
-    margin-top: 6px;
-    border-radius: 10px;
-    border: none;
+    padding: 13px 12px;
+    border-radius: 8px;
+    border: 1px solid #cfd8dc;
     outline: none;
-    background: rgba(255, 255, 255, 0.25);
-    color: #fff;
-    font-size: clamp(12px, 3vw, 15px);
+    font-size: 14px;
 }
 
-/* Tombol responsif */
+.input-group input:focus {
+    border-color: var(--maroon-light);
+}
+
+.input-group label {
+    position: absolute;
+    left: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: var(--white);
+    padding: 0 6px;
+    color: #777;
+    transition: 0.3s;
+    pointer-events: none;
+}
+
+.input-group input:focus + label,
+.input-group input:valid + label {
+    top: -7px;
+    font-size: 11px;
+    color: var(--maroon-light);
+}
+
+/* ================= BUTTON ================= */
 .btn-login {
     width: 100%;
-    margin-top: 25px;
-    padding: clamp(10px, 3vw, 14px);
+    padding: 13px;
+    border-radius: 8px;
     border: none;
-    border-radius: 10px;
-    background: #ffffff;
-    color: #0052D4;
-    cursor: pointer;
-    font-size: clamp(14px, 3vw, 17px);
+    background: linear-gradient(
+        135deg,
+        var(--maroon-primary),
+        var(--maroon-light)
+    );
+    color: var(--white);
     font-weight: 600;
+    cursor: pointer;
     transition: 0.3s;
 }
 
 .btn-login:hover {
-    background: #e6e6e6;
+    opacity: 0.9;
 }
 
-.footer {
-    margin-top: 20px;
-    color: #f0f0f0;
-    font-size: clamp(10px, 3vw, 13px);
+/* ================= ERROR ================= */
+#errorMsg {
+    margin-top: 12px;
+    font-size: 12px;
+    color: #d32f2f;
+    display: none;
 }
 
-/* Animasi */
-@keyframes fadeIn {
-    from {opacity: 0; transform: translateY(-20px);}
-    to {opacity: 1; transform: translateY(0);}
-}
-
-/* =============================
-   RESPONSIVE BREAKPOINTS
-============================= */
-
-/* Tablet */
-@media (min-width: 600px) {
-    .login-card {
-        max-width: 430px;
+/* ================= ANIMATION ================= */
+@keyframes slideFade {
+    from {
+        opacity: 0;
+        transform: translateY(25px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
     }
 }
 
-/* Laptop */
-@media (min-width: 900px) {
-    .login-card {
-        max-width: 450px;
+/* ================= RESPONSIVE ================= */
+@media (max-width: 900px) {
+    .wrapper {
+        flex-direction: column;
     }
-}
 
-/* Monitor Besar */
-@media (min-width: 1200px) {
-    .container {
-        max-width: 500px;
+    .landing {
+        padding: 60px 30px;
+        text-align: center;
+        align-items: center;
+    }
+
+    .landing p {
+        max-width: 100%;
+    }
+
+    .login-container {
+        padding: 40px 20px;
     }
 }

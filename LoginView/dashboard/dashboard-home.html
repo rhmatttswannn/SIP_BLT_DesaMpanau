@@ -11,15 +11,15 @@
 <body>
 
 <div class="cards">
-    <div class="card card-blue">
+    <div class="card card-primary">
         <h5>Total Warga</h5>
         <p>120</p>
     </div>
-    <div class="card card-teal">
+    <div class="card card-secondary">
         <h5>Penerima BLT</h5>
         <p>85</p>
     </div>
-    <div class="card card-orange">
+    <div class="card card-soft">
         <h5>Belum Terverifikasi</h5>
         <p>35</p>
     </div>
@@ -61,14 +61,18 @@ const ctx = document.getElementById('bltChart');
 new Chart(ctx, {
     type: 'bar',
     data: {
-        labels: ['Total Warga', 'Penerima BLT', 'Belum Terverifikasi'],
+        labels: [
+            'Total Warga',
+            'Penerima BLT',
+            'Belum Terverifikasi'
+        ],
         datasets: [{
             label: 'Jumlah Warga',
             data: [120, 85, 35],
             backgroundColor: [
-                '#3B82F6',
-                '#0EA5A4',
-                '#F59E0B'
+                '#7b1e1e', // maroon primary
+                '#a52a2a', // maroon light
+                '#c0392b'  // maroon soft / accent
             ],
             borderRadius: 8,
             barThickness: 40
@@ -86,18 +90,23 @@ new Chart(ctx, {
                 beginAtZero: true,
                 grid: {
                     color: '#E5E7EB'
+                },
+                ticks: {
+                    color: '#475569'
                 }
             },
             x: {
                 grid: {
                     display: false
+                },
+                ticks: {
+                    color: '#475569'
                 }
             }
         }
     }
 });
 </script>
-
 
 </body>
 </html>

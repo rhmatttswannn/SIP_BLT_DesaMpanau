@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <title>Laporan BLT • SIP BLT</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" href="laporan.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+</head>
+<body>
+
+<div class="container">
+
+    <!-- HEADER -->
+    <div class="page-header">
+        <div>
+            <h3>Laporan BLT</h3>
+            <p>Filter dan unduh laporan penerima BLT</p>
+        </div>
+    </div>
+
+    <!-- TOOLBAR -->
+    <div class="toolbar">
+        <div class="toolbar-left">
+            <select id="filterStatus">
+                <option value="all">Semua Status</option>
+                <option value="Disetujui">Disetujui</option>
+                <option value="Menunggu">Menunggu</option>
+                <option value="Ditolak">Ditolak</option>
+            </select>
+
+            <button class="btn-outline" onclick="applyFilter()">
+                <i class="fa fa-filter"></i> Filter
+            </button>
+        </div>
+
+        <div class="toolbar-right">
+            <button class="btn-pdf" onclick="exportPDF()">
+                <i class="fa fa-file-pdf"></i> PDF
+            </button>
+            <button class="btn-excel" onclick="exportExcel()">
+                <i class="fa fa-file-excel"></i> Excel
+            </button>
+        </div>
+    </div>
+
+    <!-- TABLE -->
+    <div class="table-card">
+        <table>
+            <thead>
+                <tr>
+                    <th><input type="checkbox" onclick="toggleAll(this)"></th>
+                    <th>Nama</th>
+                    <th>NIK</th>
+                    <th>Nominal</th>
+                    <th>Status</th>
+                </tr>
+            </thead>
+            <tbody id="laporanTable"></tbody>
+        </table>
+    </div>
+
+</div>
+
+<script src="laporan.js"></script>
+</body>
+</html>

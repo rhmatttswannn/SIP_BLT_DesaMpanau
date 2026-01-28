@@ -1,15 +1,33 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
+/* ================= ROOT COLOR ================= */
+:root {
+    --maroon-primary: #7b1e1e;
+    --maroon-dark: #5f1515;
+    --maroon-light: #a52a2a;
+    --maroon-soft: #fdecea;
+
+    --bg-main: #F8FAFC;
+    --text-main: #334155;
+    --white: #ffffff;
+
+    --success: #16A34A;
+    --warning: #D97706;
+}
+
+/* ================= BASE ================= */
 * {
     box-sizing: border-box;
     font-family: 'Inter', sans-serif;
 }
 
 body {
-    background: #F8FAFC;
+    background: var(--bg-main);
     padding: 20px;
-    color: #334155;
+    color: var(--text-main);
 }
 
-/* CARDS */
+/* ================= CARDS ================= */
 .cards {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
@@ -19,7 +37,7 @@ body {
 .card {
     padding: 20px;
     border-radius: 16px;
-    color: white;
+    color: var(--white);
     box-shadow: 0 10px 25px rgba(0,0,0,0.08);
 }
 
@@ -34,36 +52,49 @@ body {
     margin-top: 8px;
 }
 
-.card-blue {
-    background: linear-gradient(135deg, #1E3A8A, #3B82F6);
+/* Card Variants (Maroon Family) */
+.card-primary {
+    background: linear-gradient(
+        135deg,
+        var(--maroon-dark),
+        var(--maroon-primary)
+    );
 }
 
-.card-teal {
-    background: linear-gradient(135deg, #0EA5A4, #2DD4BF);
+.card-secondary {
+    background: linear-gradient(
+        135deg,
+        var(--maroon-primary),
+        var(--maroon-light)
+    );
 }
 
-.card-orange {
-    background: linear-gradient(135deg, #F59E0B, #FBBF24);
+.card-soft {
+    background: linear-gradient(
+        135deg,
+        #9f2d2d,
+        #c0392b
+    );
 }
 
-/* CHART */
+/* ================= CHART ================= */
 .chart-box {
-    background: #ffffff;
+    background: var(--white);
     margin-top: 30px;
     padding: 20px;
     border-radius: 16px;
     box-shadow: 0 10px 25px rgba(0,0,0,0.08);
-    border-left: 5px solid #0EA5A4;
+    border-left: 5px solid var(--maroon-primary);
 }
 
-/* TABLE */
+/* ================= TABLE ================= */
 .table-box {
-    background: #ffffff;
+    background: var(--white);
     margin-top: 30px;
     padding: 20px;
     border-radius: 16px;
     box-shadow: 0 10px 25px rgba(0,0,0,0.08);
-    border-left: 5px solid #F59E0B;
+    border-left: 5px solid var(--maroon-light);
 }
 
 table {
@@ -82,12 +113,13 @@ td {
     border-bottom: 1px solid #F1F5F9;
 }
 
+/* ================= STATUS ================= */
 .success {
-    color: #16A34A;
+    color: var(--success);
     font-weight: 600;
 }
 
 .warning {
-    color: #D97706;
+    color: var(--warning);
     font-weight: 600;
 }
