@@ -1,3 +1,19 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
+:root {
+    --maroon-primary: #7b1e1e;
+    --maroon-dark: #5f1515;
+    --maroon-light: #a52a2a;
+    --maroon-soft: #fdecea;
+
+    --bg-main: #F8FAFC;
+    --text-main: #334155;
+    --white: #ffffff;
+
+    --success: #16A34A;
+}
+
+/* ===== BASE ===== */
 * {
     margin: 0;
     padding: 0;
@@ -6,8 +22,8 @@
 }
 
 body {
-    background: #F8FAFC;
-    color: #334155;
+    background: var(--bg-main);
+    color: var(--text-main);
 }
 
 /* ===== CONTAINER ===== */
@@ -18,16 +34,18 @@ body {
 
 /* ===== FORM BOX (STICKY) ===== */
 .form-box {
-    background: #ffffff;
+    background: var(--white);
     padding: 20px;
     border-radius: 16px;
-    box-shadow: 0 8px 20px rgba(0,0,0,0.06);
+    box-shadow: 0 10px 25px rgba(0,0,0,0.08);
     margin-bottom: 20px;
+    border-left: 5px solid var(--maroon-primary);
 }
 
 .form-box h4 {
     margin-bottom: 12px;
     font-weight: 600;
+    color: var(--maroon-primary);
 }
 
 .sticky-form {
@@ -49,25 +67,32 @@ input {
     border: 1px solid #CBD5E1;
     font-size: 14px;
     outline: none;
+    transition: 0.2s;
 }
 
 input:focus {
-    border-color: #2563EB;
+    border-color: var(--maroon-primary);
+    box-shadow: 0 0 0 3px var(--maroon-soft);
 }
 
 button {
-    background: linear-gradient(135deg, #1E3A8A, #2563EB);
+    background: linear-gradient(
+        135deg,
+        var(--maroon-dark),
+        var(--maroon-primary)
+    );
     color: white;
     border: none;
     border-radius: 12px;
     padding: 12px 18px;
     font-weight: 600;
     cursor: pointer;
-    transition: 0.2s;
+    transition: 0.25s ease;
 }
 
 button:hover {
-    opacity: 0.9;
+    transform: translateY(-1px);
+    box-shadow: 0 8px 20px rgba(123,30,30,0.25);
 }
 
 /* ===== TABLE AREA ===== */
@@ -76,11 +101,12 @@ button:hover {
     overflow-y: auto;
 }
 
+/* ===== TABLE BOX ===== */
 .table-box {
-    background: #ffffff;
+    background: var(--white);
     border-radius: 16px;
     padding: 18px;
-    box-shadow: 0 8px 20px rgba(0,0,0,0.06);
+    box-shadow: 0 10px 25px rgba(0,0,0,0.08);
 }
 
 /* ===== TABLE ===== */
@@ -98,6 +124,7 @@ th {
     font-size: 13px;
     color: #64748B;
     padding-bottom: 12px;
+    font-weight: 500;
 }
 
 td {
@@ -105,24 +132,25 @@ td {
     font-size: 14px;
     border-bottom: 1px solid #F1F5F9;
 }
-/* ===== TABLE HEADER STICKY ===== */
+
+/* ===== STICKY TABLE HEADER ===== */
 thead th {
     position: sticky;
     top: 0;
-    background: #ffffff;
+    background: var(--white);
     z-index: 10;
     box-shadow: 0 2px 0 #E5E7EB;
 }
 
-
+/* ===== ROW HOVER ===== */
 tbody tr:hover {
-    background: #F8FAFC;
+    background: var(--maroon-soft);
 }
 
 /* ===== STATUS & TOKEN ===== */
 .token {
     font-family: monospace;
-    color: #0EA5A4;
+    color: var(--maroon-light);
     font-size: 13px;
 }
 
@@ -131,7 +159,7 @@ tbody tr:hover {
 }
 
 .active {
-    color: #16A34A;
+    color: var(--success);
 }
 
 /* ===== PAGINATION ===== */
@@ -149,10 +177,11 @@ tbody tr:hover {
     background: #E5E7EB;
     cursor: pointer;
     font-weight: 500;
+    transition: 0.2s;
 }
 
 .pagination button.active {
-    background: #1E3A8A;
+    background: var(--maroon-primary);
     color: white;
 }
 

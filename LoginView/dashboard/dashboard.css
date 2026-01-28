@@ -1,3 +1,6 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
+/* ================= RESET ================= */
 * {
     margin: 0;
     padding: 0;
@@ -5,30 +8,48 @@
     font-family: 'Inter', sans-serif;
 }
 
-body {
-    display: flex;
-    background: #F8FAFC;
-    color: #334155;
+/* ================= ROOT COLOR ================= */
+:root {
+    --maroon-primary: #7b1e1e;
+    --maroon-dark: #5f1515;
+    --maroon-light: #a52a2a;
+    --maroon-soft: #fdecea;
+
+    --bg-main: #F8FAFC;
+    --text-main: #334155;
+    --white: #ffffff;
 }
 
+/* ================= BODY ================= */
+body {
+    display: flex;
+    background: var(--bg-main);
+    color: var(--text-main);
+}
+
+/* ================= IFRAME ================= */
 iframe {
     width: 100%;
     height: calc(100vh - 60px);
     border: none;
-    background: #F8FAFC;
+    background: var(--bg-main);
     border-radius: 16px;
 }
 
-
-/* ===== SIDEBAR ===== */
+/* ================= SIDEBAR ================= */
 .sidebar {
     width: 240px;
     height: 100vh;
-    background: linear-gradient(180deg, #1E3A8A, #1D4ED8);
-    color: white;
+    background: linear-gradient(
+        180deg,
+        var(--maroon-dark),
+        var(--maroon-primary)
+    );
+    color: var(--white);
     position: fixed;
 }
 
+/* Sidebar Header */
 .sidebar-header {
     display: flex;
     align-items: center;
@@ -41,6 +62,7 @@ iframe {
     width: 36px;
 }
 
+/* ================= MENU ================= */
 .menu {
     list-style: none;
     padding: 10px;
@@ -54,7 +76,7 @@ iframe {
     border-radius: 12px;
     margin-bottom: 6px;
     cursor: pointer;
-    color: #E0E7FF;
+    color: #f3dcdc;
     transition: 0.25s ease;
     font-size: 15px;
 }
@@ -72,7 +94,7 @@ iframe {
 .menu li:hover,
 .menu .active {
     background: rgba(255,255,255,0.18);
-    color: #ffffff;
+    color: var(--white);
 }
 
 .menu li a {
@@ -84,28 +106,27 @@ iframe {
     width: 100%;
 }
 
-
+/* ================= LOGOUT ================= */
 .logout {
     margin-top: 25px;
-    color: #FECACA;
+    color: #fecaca;
 }
 
 .logout:hover {
-    background: rgba(239,68,68,0.25);
-    color: #ffffff;
+    background: rgba(185,28,28,0.35);
+    color: var(--white);
 }
 
-
-/* ===== MAIN ===== */
+/* ================= MAIN ================= */
 .main {
     margin-left: 240px;
     width: 100%;
 }
 
-/* ===== NAVBAR ===== */
+/* ================= NAVBAR ================= */
 .navbar {
     height: 60px;
-    background: #ffffff;
+    background: var(--white);
     padding: 0 20px;
     display: flex;
     align-items: center;
@@ -117,20 +138,20 @@ iframe {
     display: none;
     font-size: 22px;
     cursor: pointer;
+    color: var(--maroon-primary);
 }
 
 .profile span {
     font-weight: 500;
 }
 
-/* ===== CONTENT ===== */
+/* ================= CONTENT ================= */
 .content {
     padding: 25px;
 }
 
-
-/* ===== RESPONSIVE ===== */
-@media(max-width: 768px){
+/* ================= RESPONSIVE ================= */
+@media (max-width: 768px) {
     .sidebar {
         left: -240px;
         transition: 0.3s;
