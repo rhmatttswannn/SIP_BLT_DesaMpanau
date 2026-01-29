@@ -1,1 +1,71 @@
-<h1>heyyyyyy userrr</h1>
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard Admin • SIP BLT</title>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+
+    <!-- Google Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- Chart JS -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <link rel="stylesheet" href="user.css">
+</head>
+<body>
+
+<!-- SIDEBAR -->
+<aside class="sidebar">
+    <div class="sidebar-header">
+        <img src="assets/img/logo.png" alt="Logo">
+        <h3>SIP BLT</h3>
+    </div>
+<ul class="menu">
+    <li onclick="loadPage('dashboard-home.html', this)" class="active">
+        <i class="fa-solid fa-house"></i>
+        <span>Dashboard</span>
+    </li>
+
+    <li onclick="loadPage('blt/blt-form.html', this)">
+        <i class="fa-solid fa-file-circle-plus"></i>
+        <span>Pengajuan BLT</span>
+    </li>
+
+    <li onclick="loadPage('status.html', this)">
+        <i class="fa-solid fa-clipboard-check"></i>
+        <span>Status Pengajuan</span>
+    </li>
+
+    <li class="logout" onclick="logout()">
+        <i class="fa-solid fa-arrow-right-from-bracket"></i>
+        <span>Logout</span>
+    </li>
+</ul>
+
+</aside>
+
+<!-- MAIN -->
+<div class="main">
+
+
+    <!-- CONTENT -->
+<section class="content">
+
+    <!-- IFRAME CONTENT -->
+    <iframe 
+        id="contentFrame"
+        src="dashboard-home.html"
+        frameborder="0">
+    </iframe>
+
+</section>
+
+</div>
+
+<script src="user.js"></script>
+</body>
+</html>
