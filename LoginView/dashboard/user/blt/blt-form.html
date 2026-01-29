@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <title>Pengajuan BLT • SIP BLT</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+    <link rel="stylesheet" href="blt-form.css">
+</head>
+<body>
+
+<!-- TOP BAR -->
+<header class="topbar">
+    <div class="topbar-left">
+        <i class="fa-solid fa-file-lines"></i>
+        <span>Form Pengajuan BLT</span>
+    </div>
+    <div class="topbar-right">
+        <i class="fa-regular fa-bell"></i>
+        <div class="avatar">U</div>
+    </div>
+</header>
+
+<!-- MAIN -->
+<main class="page">
+
+    <div class="form-card">
+
+        <h2>Ajukan Permohonan BLT</h2>
+        <p class="subtitle">
+            Silakan isi data berikut dengan benar untuk mengajukan Bantuan Langsung Tunai.
+        </p>
+
+        <form id="userBLTForm">
+
+            <!-- NAMA -->
+            <div class="field">
+                <label>Nama Lengkap</label>
+                <input type="text" placeholder="Contoh: Ahmad Fauzi" required>
+            </div>
+
+            <!-- NIK -->
+            <div class="field">
+                <label>NIK</label>
+                <input type="text" placeholder="Nomor Induk Kependudukan" required>
+            </div>
+
+            <!-- ALAMAT -->
+            <div class="field">
+                <label>Alamat Lengkap</label>
+                <textarea rows="3" placeholder="Alamat sesuai KTP" required></textarea>
+            </div>
+
+            <!-- FILE UPLOAD -->
+            <div class="field">
+                <label>Dokumen Pendukung</label>
+
+                <div class="upload-box">
+                    <i class="fa-solid fa-cloud-arrow-up"></i>
+                    <p>Klik untuk upload berkas</p>
+                    <span>KTP, KK, Foto Rumah, Foto Dapur (JPG / PNG)</span>
+                    <input type="file" multiple required>
+                </div>
+            </div>
+
+            <!-- LOKASI -->
+            <div class="field">
+                <label>Lokasi Rumah</label>
+                <div class="location">
+                    <input type="text" placeholder="Latitude" readonly>
+                    <input type="text" placeholder="Longitude" readonly>
+                    <button type="button">
+                        <i class="fa-solid fa-location-dot"></i>
+                    </button>
+                </div>
+            </div>
+
+            <!-- SUBMIT -->
+            <button type="submit" class="btn-submit">
+                Kirim Pengajuan
+                <i class="fa-solid fa-arrow-right"></i>
+            </button>
+
+            <p class="note">
+                Dengan mengirimkan formulir ini, Anda menyetujui proses verifikasi data.
+            </p>
+
+        </form>
+
+    </div>
+
+
+</main>
+
+</body>
+</html>
