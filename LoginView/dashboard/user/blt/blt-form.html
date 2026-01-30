@@ -15,19 +15,6 @@
 </head>
 <body>
 
-<!-- TOP BAR -->
-<header class="topbar">
-    <div class="topbar-left">
-        <i class="fa-solid fa-file-lines"></i>
-        <span>Form Pengajuan BLT</span>
-    </div>
-    <div class="topbar-right">
-        <i class="fa-regular fa-bell"></i>
-        <div class="avatar">U</div>
-    </div>
-</header>
-
-<!-- MAIN -->
 <main class="page">
 
     <div class="form-card">
@@ -37,48 +24,66 @@
             Silakan isi data berikut dengan benar untuk mengajukan Bantuan Langsung Tunai.
         </p>
 
-        <form id="userBLTForm">
+        <form id="userBLTForm" enctype="multipart/form-data">
 
             <!-- NAMA -->
             <div class="field">
                 <label>Nama Lengkap</label>
-                <input type="text" placeholder="Contoh: Ahmad Fauzi" required>
+                <input type="text" name="nama" placeholder="Contoh: Ahmad Fauzi" required>
             </div>
 
             <!-- NIK -->
             <div class="field">
                 <label>NIK</label>
-                <input type="text" placeholder="Nomor Induk Kependudukan" required>
+                <input type="text" name="nik" placeholder="Nomor Induk Kependudukan" required>
+            </div>
+
+            <!-- NO HP -->
+            <div class="field">
+                <label>No. Handphone</label>
+                <input type="tel" name="no_hp" placeholder="08xxxxxxxxxx" required>
             </div>
 
             <!-- ALAMAT -->
             <div class="field">
                 <label>Alamat Lengkap</label>
-                <textarea rows="3" placeholder="Alamat sesuai KTP" required></textarea>
+                <textarea name="alamat" rows="3" placeholder="Alamat sesuai KTP" required></textarea>
             </div>
 
-            <!-- FILE UPLOAD -->
-            <div class="field">
-                <label>Dokumen Pendukung</label>
-
-                <div class="upload-box">
-                    <i class="fa-solid fa-cloud-arrow-up"></i>
-                    <p>Klik untuk upload berkas</p>
-                    <span>KTP, KK, Foto Rumah, Foto Dapur (JPG / PNG)</span>
-                    <input type="file" multiple required>
+            <!-- RT / RW -->
+            <div class="field grid-2">
+                <div>
+                    <label>RT</label>
+                    <input type="text" name="rt" placeholder="RT" required>
+                </div>
+                <div>
+                    <label>RW</label>
+                    <input type="text" name="rw" placeholder="RW" required>
                 </div>
             </div>
 
-            <!-- LOKASI -->
+            <!-- FOTO KTP -->
             <div class="field">
-                <label>Lokasi Rumah</label>
-                <div class="location">
-                    <input type="text" placeholder="Latitude" readonly>
-                    <input type="text" placeholder="Longitude" readonly>
-                    <button type="button">
-                        <i class="fa-solid fa-location-dot"></i>
-                    </button>
-                </div>
+                <label>Foto KTP</label>
+                <input type="file" name="foto_ktp" accept="image/*" required>
+            </div>
+
+            <!-- FOTO KK -->
+            <div class="field">
+                <label>Foto Kartu Keluarga (KK)</label>
+                <input type="file" name="foto_kk" accept="image/*" required>
+            </div>
+
+            <!-- FOTO RUMAH -->
+            <div class="field">
+                <label>Foto Rumah Tampak Depan</label>
+                <input type="file" name="foto_rumah" accept="image/*" required>
+            </div>
+
+            <!-- FOTO DAPUR -->
+            <div class="field">
+                <label>Foto Dapur</label>
+                <input type="file" name="foto_dapur" accept="image/*" required>
             </div>
 
             <!-- SUBMIT -->
@@ -94,7 +99,6 @@
         </form>
 
     </div>
-
 
 </main>
 

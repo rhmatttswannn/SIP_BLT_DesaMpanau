@@ -7,59 +7,75 @@ body {
     margin: 0;
     background: #F8FAFC;
 }
-
-/* SIDEBAR */
+/* ===== SIDEBAR ===== */
 .sidebar {
     width: 260px;
     height: 100vh;
-    background: #7F1D1D;
-    color: white;
+    background: linear-gradient(180deg, #7F1D1D, #7A1A1A);
+    color: #fff;
     position: fixed;
-    left: 0;
     top: 0;
-    padding: 20px 0;
+    left: 0;
+    display: flex;
+    flex-direction: column;
+    padding: 24px 0;
 }
 
 /* HEADER */
 .sidebar-header {
     text-align: center;
-    padding-bottom: 25px;
+    padding: 0 24px 24px;
     border-bottom: 1px solid rgba(255,255,255,0.15);
 }
 
-.sidebar-header img {
-    width: 55px;
-    margin-bottom: 8px;
+.logo-wrapper {
+    width: 80px;
+    height: 80px;
+    margin: 0 auto 14px;
+    border-radius: 50%;
+    background: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
+.logo-wrapper img {
+    width: 48px;
+}
+
+
 .sidebar-header h3 {
-    margin: 0;
-    font-size: 18px;
+    font-size: 12px;
     font-weight: 700;
+    letter-spacing: 0.8px;
+    margin: 0;
+}
+
+.sidebar-header p {
+    font-size: 10px;
+    margin: 4px 0 0;
+    color: #FECACA;
 }
 
 /* MENU */
 .menu {
     list-style: none;
-    padding: 20px 0;
+    padding: 20px 12px;
     margin: 0;
+    flex: 1;
 }
 
 .menu li {
     display: flex;
     align-items: center;
     gap: 14px;
-    padding: 14px 28px;
+    padding: 14px 18px;
+    border-radius: 10px;
     cursor: pointer;
-    transition: all 0.25s ease;
     font-size: 14px;
     color: #FEE2E2;
-}
-
-.menu li i {
-    font-size: 16px;
-    width: 20px;
-    text-align: center;
+    transition: background 0.25s ease;
+    margin-bottom: 6px;
 }
 
 /* HOVER */
@@ -67,16 +83,28 @@ body {
     background: rgba(255,255,255,0.12);
 }
 
-/* ACTIVE */
+/* ACTIVE MENU */
 .menu li.active {
-    background: #991B1B;
+    background: rgba(255,255,255,0.18);
     color: #fff;
-    border-left: 4px solid #FCA5A5;
+    position: relative;
+}
+
+/* GARIS PUTIH KIRI */
+.menu li.active::before {
+    content: '';
+    position: absolute;
+    left: -6px;
+    top: 8px;
+    bottom: 8px;
+    width: 4px;
+    background: #fff;
+    border-radius: 6px;
 }
 
 /* LOGOUT */
 .menu li.logout {
-    margin-top: 30px;
+    margin-top: auto;
     color: #FECACA;
 }
 

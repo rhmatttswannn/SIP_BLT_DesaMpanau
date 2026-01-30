@@ -8,13 +8,9 @@
     font-family: 'Inter', sans-serif;
 }
 
-/* ================= ROOT COLOR ================= */
+/* ================= ROOT ================= */
 :root {
     --maroon-primary: #7b1e1e;
-    --maroon-dark: #5f1515;
-    --maroon-light: #a52a2a;
-    --maroon-soft: #fdecea;
-
     --bg-main: #F8FAFC;
     --text-main: #334155;
     --white: #ffffff;
@@ -22,105 +18,109 @@
 
 /* ================= BODY ================= */
 body {
-    display: flex;
     background: var(--bg-main);
     color: var(--text-main);
 }
 
-/* ================= IFRAME ================= */
-iframe {
-    width: 100%;
-    height: calc(100vh - 60px);
-    border: none;
-    background: var(--bg-main);
-    border-radius: 16px;
-}
-
 /* ================= SIDEBAR ================= */
 .sidebar {
-    width: 240px;
+    width: 260px;
     height: 100vh;
-    background: linear-gradient(
-        180deg,
-        var(--maroon-dark),
-        var(--maroon-primary)
-    );
-    color: var(--white);
+    background: linear-gradient(180deg, #7F1D1D, #7A1A1A);
+    color: #fff;
     position: fixed;
+    top: 0;
+    left: 0;
+    display: flex;
+    flex-direction: column;
+    padding: 24px 0;
+    transition: left 0.3s ease;
 }
 
-/* Sidebar Header */
+/* HEADER */
 .sidebar-header {
+    text-align: center;
+    padding: 0 24px 24px;
+    border-bottom: 1px solid rgba(255,255,255,0.15);
+}
+
+.logo-wrapper {
+    width: 80px;
+    height: 80px;
+    margin: 0 auto 14px;
+    border-radius: 50%;
+    background: #fff;
     display: flex;
     align-items: center;
-    gap: 10px;
-    padding: 20px;
+    justify-content: center;
+}
+
+.logo-wrapper img {
+    width: 48px;
+}
+
+.sidebar-header h3 {
+    font-size: 12px;
     font-weight: 700;
 }
 
-.sidebar-header img {
-    width: 36px;
+.sidebar-header p {
+    font-size: 10px;
+    margin-top: 4px;
+    color: #FECACA;
 }
 
-/* ================= MENU ================= */
+/* MENU */
 .menu {
     list-style: none;
-    padding: 10px;
+    padding: 20px 12px;
+    flex: 1;
 }
 
 .menu li {
     display: flex;
     align-items: center;
     gap: 14px;
-    padding: 12px 16px;
-    border-radius: 12px;
-    margin-bottom: 6px;
+    padding: 14px 18px;
+    border-radius: 10px;
     cursor: pointer;
-    color: #f3dcdc;
-    transition: 0.25s ease;
-    font-size: 15px;
+    font-size: 14px;
+    color: #FEE2E2;
+    margin-bottom: 6px;
+    transition: background 0.25s ease, padding-left 0.2s ease;
 }
 
-.menu li i {
-    font-size: 16px;
-    min-width: 20px;
-    text-align: center;
+.menu li:hover {
+    background: rgba(255,255,255,0.12);
+    padding-left: 22px;
 }
 
-.menu li span {
-    flex: 1;
-}
-
-.menu li:hover,
-.menu .active {
+.menu li.active {
     background: rgba(255,255,255,0.18);
-    color: var(--white);
+    color: #fff;
+    position: relative;
 }
 
-.menu li a {
-    display: flex;
-    align-items: center;
-    gap: 14px;
-    color: inherit;
-    text-decoration: none;
-    width: 100%;
+.menu li.active::before {
+    content: '';
+    position: absolute;
+    left: -6px;
+    top: 8px;
+    bottom: 8px;
+    width: 4px;
+    background: #fff;
+    border-radius: 6px;
 }
 
-/* ================= LOGOUT ================= */
-.logout {
-    margin-top: 25px;
-    color: #fecaca;
-}
-
-.logout:hover {
-    background: rgba(185,28,28,0.35);
-    color: var(--white);
+.menu li.logout {
+    margin-top: auto;
+    color: #FECACA;
 }
 
 /* ================= MAIN ================= */
 .main {
-    margin-left: 240px;
-    width: 100%;
+    margin-left: 260px;
+    width: calc(100% - 260px);
 }
 
 /* ================= NAVBAR ================= */
@@ -141,20 +141,23 @@ iframe {
     color: var(--maroon-primary);
 }
 
-.profile span {
-    font-weight: 500;
-}
-
 /* ================= CONTENT ================= */
 .content {
     padding: 25px;
 }
 
+iframe {
+    width: 100%;
+    height: calc(100vh - 60px - 50px);
+    border: none;
+    border-radius: 16px;
+    background: var(--bg-main);
+}
+
 /* ================= RESPONSIVE ================= */
 @media (max-width: 768px) {
     .sidebar {
-        left: -240px;
-        transition: 0.3s;
+        left: -260px;
     }
 
     .sidebar.active {
@@ -163,6 +166,7 @@ iframe {
 
     .main {
         margin-left: 0;
+        width: 100%;
     }
 
     .menu-toggle {
