@@ -20,33 +20,39 @@
 
 <!-- SIDEBAR -->
 <aside class="sidebar">
+
     <div class="sidebar-header">
-        <img src="assets/img/logo.png" alt="Logo">
-        <h3>SIP BLT</h3>
+        <div class="logo-wrapper">
+            <img src="/LoginView/assets/img/logo.png" alt="Logo">
+        </div>
+        <h3>BANTUAN LANGSUNG TUNAI</h3>
+        <p>PEMDES MPANAU</p>
     </div>
-<ul class="menu">
-    <li onclick="loadPage('dashboard-home.html', this)" class="active">
-        <i class="fa-solid fa-house"></i>
-        <span>Dashboard</span>
-    </li>
 
-    <li onclick="loadPage('blt/blt-form.html', this)">
-        <i class="fa-solid fa-file-circle-plus"></i>
-        <span>Pengajuan BLT</span>
-    </li>
+    <ul class="menu">
+        <!-- <li onclick="loadPage('dashboard-home.html', this)" class="active">
+            <i class="fa-solid fa-house"></i>
+            <span>Dashboard</span>
+        </li> -->
 
-    <li onclick="loadPage('status.html', this)">
-        <i class="fa-solid fa-clipboard-check"></i>
-        <span>Status Pengajuan</span>
-    </li>
+        <li onclick="loadPage('blt/blt-form.html', this)">
+            <i class="fa-solid fa-file-circle-plus"></i>
+            <span>Pengajuan BLT</span>
+        </li>
 
-    <li class="logout" onclick="logout()">
-        <i class="fa-solid fa-arrow-right-from-bracket"></i>
-        <span>Logout</span>
-    </li>
-</ul>
+        <li onclick="loadPage('status.html', this)">
+            <i class="fa-solid fa-clipboard-check"></i>
+            <span>Status Pengajuan</span>
+        </li>
+
+        <li class="logout" onclick="logout()">
+            <i class="fa-solid fa-arrow-right-from-bracket"></i>
+            <span>Logout</span>
+        </li>
+    </ul>
 
 </aside>
+
 
 <!-- MAIN -->
 <div class="main">

@@ -3,49 +3,107 @@
 <head>
     <meta charset="UTF-8">
     <title>Status Pengajuan BLT</title>
+
+    <!-- Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+    <!-- CSS -->
     <link rel="stylesheet" href="status.css">
 </head>
 <body>
 
 <div class="page-container">
 
-    <div class="page-header">
-        <h2>Status Pengajuan BLT</h2>
-        <p>Pantau status pengajuan bantuan Anda secara real-time</p>
-    </div>
-
-    <div class="status-card">
-        <div class="status-header">
-            <span><i class="fa-solid fa-file-lines"></i> Informasi Pengajuan</span>
-            <span class="badge success">Diterima</span>
-            <!-- status: success | warning | danger -->
+    <!-- TOP BAR -->
+    <div class="top-bar">
+        <div class="top-left">
+            <h2>Status Pengajuan BLT</h2>
+            <p>Pantau status pengajuan bantuan Anda secara real-time</p>
         </div>
 
-        <div class="status-body">
-            <div class="info">
-                <label>Nama Lengkap</label>
-                <span>Ahmad Fauzi</span>
+        <div class="top-right">
+            <i class="fa-regular fa-bell"></i>
+            <div class="user">
+                <span>
+                    <b>Ahmad Fauzi</b><br>
+                    <small>Penerima Manfaat</small>
+                </span>
+                <div class="avatar">AF</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- CARD -->
+    <div class="status-card">
+
+        <!-- CARD HEADER -->
+        <div class="card-header">
+            <div class="header-left">
+                <div class="icon">
+                    <i class="fa-solid fa-circle-info"></i>
+                </div>
+                <span>Informasi Pengajuan</span>
             </div>
 
-            <div class="info">
-                <label>NIK</label>
-                <span>3201123456780001</span>
+            <span class="badge success">DITERIMA</span>
+        </div>
+
+        <!-- CARD BODY -->
+        <div class="card-body">
+
+            <div class="grid">
+                <div class="item">
+                    <label>Nama Lengkap</label>
+                    <span>Ahmad Fauzi</span>
+                </div>
+
+                <div class="item">
+                    <label>NIK</label>
+                    <span>3201123456780001</span>
+                </div>
+
+                <div class="item">
+                    <label>Tanggal Pengajuan</label>
+                    <span>12 Januari 2026</span>
+                </div>
+
+                <div class="item">
+                    <label>Status</label>
+                    <span class="status success">
+                        <i class="fa-solid fa-circle"></i> Diterima
+                    </span>
+                </div>
             </div>
 
-            <div class="info">
-                <label>Tanggal Pengajuan</label>
-                <span>12 Januari 2026</span>
-            </div>
-
-            <div class="info">
-                <label>Status</label>
-                <span class="status-text success">Diterima</span>
-            </div>
-
-            <div class="info full">
+            <!-- KETERANGAN -->
+            <div class="note">
                 <label>Keterangan</label>
-                <span>Pengajuan Anda telah disetujui dan akan segera dicairkan.</span>
+                <p>
+                    Selamat! Pengajuan Anda telah <b>disetujui</b> dan akan segera dicairkan.
+                    Silakan periksa rekening atau titik layanan pencairan terdekat sesuai jadwal
+                    yang telah ditentukan.
+                </p>
             </div>
+
+            <!-- FOOTER -->
+            <div class="card-footer">
+                <span class="update">
+                    Terakhir diperbarui: 15 Januari 2026, 09:42 WIB
+                </span>
+
+                <div class="actions">
+                    <button class="btn-outline">
+                        <i class="fa-solid fa-download"></i> Unduh Bukti
+                    </button>
+                    <button class="btn-primary">
+                        Hubungi Bantuan
+                    </button>
+                </div>
+            </div>
+
         </div>
     </div>
 

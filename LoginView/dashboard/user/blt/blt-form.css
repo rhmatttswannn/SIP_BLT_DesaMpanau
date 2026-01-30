@@ -9,68 +9,36 @@ body {
     color: #1F2937;
 }
 
-/* TOP BAR */
-.topbar {
-    background: #991B1B;
-    color: white;
-    padding: 14px 24px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-
-.topbar-left {
-    display: flex;
-    gap: 10px;
-    align-items: center;
-    font-weight: 600;
-}
-
-.topbar-right {
-    display: flex;
-    gap: 14px;
-    align-items: center;
-}
-
-.avatar {
-    width: 34px;
-    height: 34px;
-    border-radius: 50%;
-    background: #FCA5A5;
-    color: #7F1D1D;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-weight: 700;
-}
-
 /* PAGE */
 .page {
-    max-width: 680px;
-    margin: 40px auto;
+    max-width: 720px;
+    margin: 50px auto;
     padding: 0 20px;
 }
 
 /* CARD */
 .form-card {
-    background: white;
-    border-radius: 16px;
-    padding: 30px;
-    box-shadow: 0 20px 40px rgba(0,0,0,0.06);
+    background: #ffffff;
+    border-radius: 18px;
+    padding: 34px;
+    box-shadow: 0 25px 50px rgba(0,0,0,0.08);
 }
 
 .form-card h2 {
     margin: 0;
+    font-size: 22px;
+    font-weight: 700;
 }
 
 .subtitle {
-    margin: 8px 0 25px;
+    margin: 10px 0 28px;
     color: #6B7280;
+    font-size: 14px;
 }
 
 /* FIELD */
 .field {
-    margin-bottom: 18px;
+    margin-bottom: 20px;
 }
 
 label {
@@ -78,37 +46,67 @@ label {
     font-weight: 600;
     margin-bottom: 6px;
     display: block;
+    color: #374151;
 }
 
-input, textarea {
+input,
+textarea {
     width: 100%;
-    padding: 12px 14px;
-    border-radius: 10px;
+    padding: 13px 15px;
+    border-radius: 12px;
     border: 1px solid #D1D5DB;
     font-size: 14px;
+    transition: 0.2s;
+}
+
+input:focus,
+textarea:focus {
+    outline: none;
+    border-color: #991B1B;
+    box-shadow: 0 0 0 3px rgba(153,27,27,0.15);
 }
 
 textarea {
     resize: none;
 }
 
-/* UPLOAD */
+/* GRID RT RW */
+.grid-2 {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 14px;
+}
+
+/* FILE INPUT */
+input[type="file"] {
+    padding: 10px;
+    background: #F9FAFB;
+    cursor: pointer;
+}
+
+/* UPLOAD BOX (opsional jika dipakai lagi) */
 .upload-box {
     border: 2px dashed #E5E7EB;
-    border-radius: 12px;
-    padding: 25px;
+    border-radius: 14px;
+    padding: 26px;
     text-align: center;
     cursor: pointer;
     position: relative;
+    transition: 0.2s;
+}
+
+.upload-box:hover {
+    background: #F9FAFB;
+    border-color: #991B1B;
 }
 
 .upload-box i {
-    font-size: 26px;
+    font-size: 28px;
     color: #991B1B;
 }
 
 .upload-box p {
-    margin: 8px 0 4px;
+    margin: 10px 0 4px;
     font-weight: 600;
 }
 
@@ -124,34 +122,15 @@ textarea {
     cursor: pointer;
 }
 
-/* LOCATION */
-.location {
-    display: flex;
-    gap: 10px;
-}
-
-.location input {
-    flex: 1;
-}
-
-.location button {
-    background: #991B1B;
-    border: none;
-    color: white;
-    padding: 0 14px;
-    border-radius: 10px;
-    cursor: pointer;
-}
-
 /* SUBMIT */
 .btn-submit {
     width: 100%;
-    margin-top: 20px;
-    background: #991B1B;
+    margin-top: 26px;
+    background: linear-gradient(135deg, #991B1B, #7F1D1D);
     color: white;
     border: none;
-    padding: 14px;
-    border-radius: 12px;
+    padding: 15px;
+    border-radius: 14px;
     font-size: 15px;
     font-weight: 600;
     cursor: pointer;
@@ -159,13 +138,17 @@ textarea {
     justify-content: center;
     gap: 10px;
     align-items: center;
+    transition: 0.2s;
+}
+
+.btn-submit:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 10px 20px rgba(153,27,27,0.3);
 }
 
 .note {
     text-align: center;
     font-size: 12px;
     color: #9CA3AF;
-    margin-top: 10px;
+    margin-top: 14px;
 }
-
-
