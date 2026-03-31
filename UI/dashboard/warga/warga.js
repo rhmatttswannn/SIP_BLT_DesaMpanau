@@ -50,14 +50,18 @@ function renderTable() {
                 <td>${w.nama}</td>
                 <td>${w.nik}</td>
                 <td class="token">
-                ${w.token ? `
-                    <span class="token-text" style="display:none;">${w.token}</span>
-                    <button class="icon-btn" onclick="toggleToken(this)">
-                        <i class="fa-solid fa-eye"></i>
+                    ${w.token ? `
+                        <span class="token-text" style="display:none;">${w.token}</span>
+                        <button class="icon-btn" onclick="toggleToken(this)">
+                            <i class="fa-solid fa-eye"></i>
+                        </button>
+                    ` : "-"}
+                </td>
+                <td>
+                    <button class="delete-btn" onclick="deleteWarga(${w.id})">
+                        <i class="fa-solid fa-trash"></i> Hapus
                     </button>
-                ` : "-"}
-            </td>
-                <td class="status active">Aktif</td>
+                </td>
             </tr>
         `;
     });
@@ -99,6 +103,65 @@ function goToPage(page) {
     renderPagination();
 }
 
+async function deleteWarga(id) {
+
+    const confirmDelete = await Swal.fire({
+        title: "Hapus Data Warga?",
+        text: "Data yang dihapus dapat dipulihkan kembali.",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#e74c3c",
+        cancelButtonColor: "#6c757d",
+        confirmButtonText: "Ya, Hapus!",
+        cancelButtonText: "Batal"
+    });
+
+    if (!confirmDelete.isConfirmed) return;
+
+    try {
+        const res = await fetch(`${API_URL}/api/warga/${id}`, {
+            method: "DELETE",
+            headers: {
+                "Authorization": `Bearer ${token}`
+            }
+        });
+
+        const result = await res.json();
+
+        if (!res.ok) {
+            Swal.fire({
+                icon: "error",
+                title: "Gagal",
+                text: result.message
+            });
+            return;
+        }
+
+        // hapus dari array lokal
+        wargaData = wargaData.filter(w => w.id !== id);
+
+        renderTable();
+        renderPagination();
+
+        Swal.fire({
+            icon: "success",
+            title: "Berhasil",
+            text: "Data warga berhasil dihapus",
+            timer: 1500,
+            showConfirmButton: false
+        });
+
+    } catch (err) {
+        console.error(err);
+
+        Swal.fire({
+            icon: "error",
+            title: "Error",
+            text: "Terjadi kesalahan saat menghapus data"
+        });
+    }
+}
+
 // ================= GENERATE WARGA =================
 form.addEventListener("submit", async function (e) {
     e.preventDefault();
@@ -125,10 +188,10 @@ form.addEventListener("submit", async function (e) {
 
        // Tambahkan warga baru ke awal array
         wargaData.unshift({
+            id: result.data.id,
             nama: result.data.nama,
             nik: result.data.nik,
-            token: result.data.password_token,
-            status: "Aktif"
+            token: result.data.password_token
         });
 
         // Reset ke halaman pertama

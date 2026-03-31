@@ -45,9 +45,22 @@ function loadPage(page, element) {
     element.classList.add('active');
 }
 
-function logout() {
-    if (confirm('Yakin ingin logout?')) {
-        localStorage.clear();
+async function logout() {
+    const result = await Swal.fire({
+        title: "Yakin ingin logout?",
+        text: "Anda akan keluar dari sesi saat ini.",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#7b1e1e",
+        cancelButtonColor: "#6c757d",
+        confirmButtonText: "Ya, Logout",
+        cancelButtonText: "Batal"
+    });
+
+    if (result.isConfirmed) {
+        localStorage.removeItem("token");
+        localStorage.removeItem("role");
         window.location.href = "../../index.html";
     }
 }
+

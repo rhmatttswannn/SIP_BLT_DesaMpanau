@@ -21,7 +21,7 @@ async function validateToken() {
         if (!res.ok) throw new Error("Invalid");
 
         const data = await res.json();
-        document.querySelector(".profile span").innerText = data.username;
+        document.querySelector(".profile span").innerText = data.data.username || "Admin";
 
     } catch (err) {
         localStorage.removeItem("token");
@@ -57,8 +57,19 @@ function loadPage(page, el) {
 }
 
 // ================= LOGOUT =================
-function logout() {
-    if (confirm("Yakin ingin logout?")) {
+async function logout() {
+    const result = await Swal.fire({
+        title: "Yakin ingin logout?",
+        text: "Anda akan keluar dari sesi saat ini.",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#7b1e1e",
+        cancelButtonColor: "#6c757d",
+        confirmButtonText: "Ya, Logout",
+        cancelButtonText: "Batal"
+    });
+
+    if (result.isConfirmed) {
         localStorage.clear();
         sessionStorage.clear();
         window.location.href = "../index.html";

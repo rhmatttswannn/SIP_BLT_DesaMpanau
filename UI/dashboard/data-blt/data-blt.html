@@ -7,101 +7,302 @@
 
     <link rel="stylesheet" href="data-blt.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
 <body>
 
-<div class="container">
+<div class="page-wrapper">
 
-    <!-- FORM INPUT BLT -->
-    <div class="form-box sticky-form">
-        <h4>Input Data BLT</h4>
-
-        <form id="bltForm" class="form-grid" enctype="multipart/form-data" autocomplete="off">
-
-            <div class="form-group">
-                <label>Nama Warga</label>
-                <input type="text" id="nama" name="nama" required>
+    <!-- PAGE HEADER -->
+    <div class="page-header">
+        <div class="header-left">
+            <h2>Data Pengajuan BLT</h2>
+            <p>Kelola dan verifikasi pengajuan Bantuan Langsung Tunai warga</p>
+        </div>
+        <div class="header-stats" id="headerStats">
+            <div class="stat-chip stat-all">
+                <!-- users -->
+                <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+                <span id="statTotal">0</span> Total
             </div>
-
-            <div class="form-group">
-                <label>NIK</label>
-                <input type="text" id="nik" name="nik" required>
+            <div class="stat-chip stat-menunggu">
+                <!-- clock -->
+                <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                <span id="statMenunggu">0</span> Menunggu
             </div>
-
-            <div class="form-group">
-                <label>Nominal BLT</label>
-                <input type="number" id="nominal" name="nominal" required>
+            <div class="stat-chip stat-disetujui">
+                <!-- check circle -->
+                <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+                <span id="statDisetujui">0</span> Disetujui
             </div>
-
-            <div class="form-group">
-                <label>Status</label>
-                <select id="status" name="status">
-                    <option value="Menunggu">Menunggu</option>
-                    <option value="Disetujui">Disetujui</option>
-                    <option value="Ditolak">Ditolak</option>
-                </select>
+            <div class="stat-chip stat-ditolak">
+                <!-- x circle -->
+                <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="15" y1="9" x2="9" y2="15"/><line x1="9" y1="9" x2="15" y2="15"/></svg>
+                <span id="statDitolak">0</span> Ditolak
             </div>
-
-            <div class="form-group">
-                <label>Fotokopi KTP</label>
-                <input type="file" id="ktp" name="ktp" accept=".jpg,.jpeg,.png" required>
-            </div>
-
-            <div class="form-group">
-                <label>Fotokopi KK</label>
-                <input type="file" id="kk" name="kk" accept=".jpg,.jpeg,.png" required>
-            </div>
-
-            <div class="form-group">
-                <label>Foto Rumah Tampak Depan</label>
-                <input type="file" id="rumah" name="rumah" accept=".jpg,.jpeg,.png" required>
-            </div>
-
-            <div class="form-group">
-                <label>Foto Dapur</label>
-                <input type="file" id="dapur" name="dapur" accept=".jpg,.jpeg,.png" required>
-            </div>
-
-            <div class="form-group full">
-                <label>Lokasi Rumah</label>
-                <div class="location">
-                    <input type="text" id="lat" placeholder="Latitude" readonly required>
-                    <input type="text" id="lng" placeholder="Longitude" readonly required>
-                    <button type="button" onclick="getLocation()">
-                        <i class="fa fa-location-dot"></i>
-                    </button>
-                </div>
-            </div>
-
-            <div class="form-group full">
-                <button type="submit" class="btn-submit">
-                    <i class="fa fa-save"></i> Simpan Data
-                </button>
-            </div>
-
-        </form>
+        </div>
     </div>
 
-    <!-- TABLE -->
-    <div class="table-wrapper">
-        <div class="table-box">
+    <!-- TOOLBAR -->
+    <div class="toolbar">
+        <div class="toolbar-left">
+            <div class="search-box">
+                <!-- search -->
+                <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+                <input type="text" id="searchInput" placeholder="Cari nama atau NIK...">
+            </div>
+        </div>
+        <div class="toolbar-right">
+            <button class="filter-btn active" data-filter="all" onclick="setFilter('all', this)">
+                Semua
+            </button>
+            <button class="filter-btn" data-filter="Menunggu" onclick="setFilter('Menunggu', this)">
+                <span class="dot dot-menunggu"></span> Menunggu
+            </button>
+            <button class="filter-btn" data-filter="Disetujui" onclick="setFilter('Disetujui', this)">
+                <span class="dot dot-disetujui"></span> Disetujui
+            </button>
+            <button class="filter-btn" data-filter="Ditolak" onclick="setFilter('Ditolak', this)">
+                <span class="dot dot-ditolak"></span> Ditolak
+            </button>
+        </div>
+    </div>
+
+    <!-- TABLE CARD -->
+    <div class="table-card">
+        <!-- LOADING STATE -->
+        <div id="loadingState" class="state-box">
+            <div class="spinner"></div>
+            <p>Memuat data...</p>
+        </div>
+
+        <!-- EMPTY STATE -->
+        <div id="emptyState" class="state-box" style="display:none;">
+            <!-- folder open -->
+            <svg class="empty-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/><line x1="12" y1="11" x2="12" y2="17"/><line x1="9" y1="14" x2="15" y2="14"/></svg>
+            <p>Belum ada data pengajuan</p>
+            <small>Data akan muncul setelah warga mengajukan permohonan BLT</small>
+        </div>
+
+        <!-- TABLE -->
+        <div id="tableContainer" style="display:none;">
             <table>
                 <thead>
                     <tr>
-                        <th>Nama</th>
-                        <th>NIK</th>
-                        <th>Nominal</th>
+                        <th>No</th>
+                        <th>Nama & NIK</th>
+                        <th>Alamat</th>
+                        <th>Kelengkapan Berkas</th>
                         <th>Status</th>
-                        <th>Lokasi</th>
-                        <th>Berkas</th>
                         <th>Aksi</th>
                     </tr>
                 </thead>
-                <tbody id="bltTable"></tbody>
+                <tbody id="bltTableBody"></tbody>
             </table>
         </div>
     </div>
 
+</div>
+
+<!-- ===================== MODAL DETAIL & VERIFIKASI ===================== -->
+<div id="modalOverlay" class="modal-overlay" onclick="closeModal(event)">
+    <div class="modal-box">
+
+        <div class="modal-header">
+            <div class="modal-title">
+                <!-- clipboard check -->
+                <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color:var(--maroon-primary)"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>
+                <div>
+                    <h3 id="modalNama">-</h3>
+                    <small id="modalNik">-</small>
+                </div>
+            </div>
+            <button class="modal-close" onclick="closeModalBtn()">
+                <!-- xmark -->
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+            </button>
+        </div>
+
+        <div class="modal-body">
+
+            <!-- INFO SECTION -->
+            <div class="modal-section">
+                <h4 class="section-title">
+                    <!-- info circle -->
+                    <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+                    Informasi Warga
+                </h4>
+                <div class="info-grid info-grid-2">
+                    <div class="info-item">
+                        <label>Alamat</label>
+                        <span id="modalAlamat">-</span>
+                    </div>
+                    <div class="info-item">
+                        <label>Status Saat Ini</label>
+                        <span id="modalStatusBadge">-</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- DOKUMEN SECTION -->
+            <div class="modal-section">
+                <h4 class="section-title">
+                    <!-- images -->
+                    <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+                    Dokumen Pendukung
+                </h4>
+                <div class="dokumen-grid">
+                    <div class="dokumen-item" onclick="viewImage(this)" data-label="Foto KTP">
+                        <div class="doc-preview" id="previewKtp">
+                            <!-- id card -->
+                            <svg class="doc-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="5" width="20" height="14" rx="2"/><circle cx="8" cy="12" r="2"/><path d="M14 9h4M14 13h4M14 17H8"/></svg>
+                            <span>Foto KTP</span>
+                        </div>
+                    </div>
+                    <div class="dokumen-item" onclick="viewImage(this)" data-label="Kartu Keluarga">
+                        <div class="doc-preview" id="previewKk">
+                            <!-- users / family -->
+                            <svg class="doc-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+                            <span>Kartu Keluarga</span>
+                        </div>
+                    </div>
+                    <div class="dokumen-item" onclick="viewImage(this)" data-label="Foto Rumah">
+                        <div class="doc-preview" id="previewRumah">
+                            <!-- home -->
+                            <svg class="doc-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+                            <span>Foto Rumah</span>
+                        </div>
+                    </div>
+                    <div class="dokumen-item" onclick="viewImage(this)" data-label="Foto Dapur">
+                        <div class="doc-preview" id="previewDapur">
+                            <!-- utensils -->
+                            <svg class="doc-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 2v7c0 1.1.9 2 2 2h4a2 2 0 0 0 2-2V2"/><path d="M7 2v20"/><path d="M21 15V2a5 5 0 0 0-5 5v6c0 1.1.9 2 2 2h3zm0 0v7"/></svg>
+                            <span>Foto Dapur</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- CATATAN PENOLAKAN (jika ada) -->
+            <div class="modal-section" id="catatanSection" style="display:none;">
+                <h4 class="section-title catatan-title">
+                    <!-- warning triangle -->
+                    <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+                    Catatan Penolakan
+                </h4>
+                <div id="catatanList" class="catatan-list"></div>
+            </div>
+
+        </div>
+
+        <!-- MODAL FOOTER AKSI -->
+        <div class="modal-footer" id="modalFooter">
+            <!-- AREA TOMBOL VERIFIKASI -->
+            <div id="verifikasiArea">
+                <button class="btn-tolak" onclick="openTolakForm()">
+                    <!-- x -->
+                    <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+                    Tolak
+                </button>
+                <button class="btn-setujui" onclick="verifikasiWarga('Disetujui')">
+                    <!-- check -->
+                    <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+                    Setujui
+                </button>
+            </div>
+
+            <!-- AREA PESAN SUDAH DIVERIFIKASI -->
+            <div id="verifiedMessage" style="display:none; width:100%; text-align:center;"></div>
+
+            <!-- FORM TOLAK (hidden by default) -->
+            <div id="tolakForm" style="display:none; width:100%;">
+                <label class="tolak-label">Masukkan alasan penolakan:</label>
+                <textarea id="catatanInput" rows="3" placeholder="Contoh: Dokumen tidak lengkap, foto KTP buram..."></textarea>
+                <div class="tolak-actions">
+                    <button class="btn-batal" onclick="closeTolakForm()">
+                        <!-- arrow left -->
+                        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>
+                        Batal
+                    </button>
+                    <button class="btn-tolak-confirm" onclick="verifikasiWarga('Ditolak')">
+                        <!-- x -->
+                        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+                        Konfirmasi Tolak
+                    </button>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<!-- ===================== LIGHTBOX ===================== -->
+<div id="lightbox" class="lightbox" onclick="closeLightboxOverlay(event)">
+    <div class="lb-inner">
+
+        <!-- TOP BAR -->
+        <div class="lb-topbar">
+            <div class="lb-label">
+                <!-- icon gambar -->
+                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="opacity:0.6">
+                    <rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/>
+                    <polyline points="21 15 16 10 5 21"/>
+                </svg>
+                <span id="lbLabel">Foto</span>
+            </div>
+            <div class="lb-actions">
+                <span id="lbCounter" class="lb-counter">1 / 4</span>
+
+                <!-- Tombol Unduh -->
+                <button class="lb-btn" id="lbDownloadBtn" onclick="lbDownload()" title="Unduh foto">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+                        <polyline points="7 10 12 15 17 10"/>
+                        <line x1="12" y1="15" x2="12" y2="3"/>
+                    </svg>
+                    <span class="lb-btn-text">Unduh</span>
+                </button>
+
+                <!-- Tombol Tutup -->
+                <button class="lb-btn lb-btn-close" onclick="closeLightbox()" title="Tutup (Esc)">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                        <line x1="18" y1="6" x2="6" y2="18"/>
+                        <line x1="6" y1="6" x2="18" y2="18"/>
+                    </svg>
+                    <span class="lb-btn-text">Tutup</span>
+                </button>
+            </div>
+        </div>
+
+        <!-- IMAGE AREA -->
+        <div class="lb-img-wrapper">
+
+            <!-- Tombol Sebelumnya -->
+            <button class="lb-nav lb-prev" onclick="lbNavigate(-1)" title="Sebelumnya">
+                <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                    <polyline points="15 18 9 12 15 6"/>
+                </svg>
+            </button>
+
+            <div class="lb-img-box">
+                <img id="lbImg" src="" alt="Foto Dokumen">
+                <div id="lbSpinner" class="lb-spinner" style="display:none;">
+                    <div class="lb-spin-circle"></div>
+                </div>
+            </div>
+
+            <!-- Tombol Berikutnya -->
+            <button class="lb-nav lb-next" onclick="lbNavigate(1)" title="Berikutnya">
+                <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                    <polyline points="9 18 15 12 9 6"/>
+                </svg>
+            </button>
+        </div>
+
+        <!-- THUMBNAIL STRIP -->
+        <div class="lb-thumbs" id="lbThumbs"></div>
+
+    </div>
 </div>
 
 <script src="data-blt.js"></script>
