@@ -1,100 +1,167 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
 
-/* ================= ROOT COLOR ================= */
+/* ===== ROOT ===== */
 :root {
     --maroon-primary: #7b1e1e;
-    --maroon-dark: #5f1515;
-    --maroon-light: #a52a2a;
-    --maroon-soft: #fdecea;
+    --maroon-dark:    #5f1515;
+    --maroon-light:   #a52a2a;
+    --maroon-soft:    #fdecea;
 
-    --bg-main: #F8FAFC;
+    --bg-main:   #F8FAFC;
     --text-main: #334155;
-    --white: #ffffff;
+    --text-soft: #64748B;
+    --white:     #ffffff;
+    --border:    #E2E8F0;
 
     --success: #16A34A;
-    --warning: #D97706;
+    --success-bg: #DCFCE7;
+    --warning: #B45309;
+    --warning-bg: #FEF9C3;
+    --danger:  #DC2626;
+    --danger-bg: #FEE2E2;
 }
 
-/* ================= BASE ================= */
-* {
+/* ===== BASE ===== */
+*, *::before, *::after {
     box-sizing: border-box;
+    margin: 0;
+    padding: 0;
     font-family: 'Inter', sans-serif;
 }
 
 body {
     background: var(--bg-main);
-    padding: 20px;
     color: var(--text-main);
 }
 
-/* ================= CARDS ================= */
-.cards {
+.page-wrapper {
+    padding: 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    max-width: 1200px;
+}
+
+/* ===== HEADER ===== */
+.page-header {
+    display: flex;
+    flex-direction: column;
+}
+
+.header-left h2 {
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--maroon-primary);
+}
+
+.header-left p {
+    font-size: 13px;
+    color: var(--text-soft);
+    margin-top: 4px;
+}
+
+/* ===== LOAD STATE ===== */
+.state-box {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    padding: 60px 24px;
+    color: var(--text-soft);
+    text-align: center;
+}
+.spinner {
+    width: 36px;
+    height: 36px;
+    border: 3px solid var(--border);
+    border-top-color: var(--maroon-primary);
+    border-radius: 50%;
+    animation: spin 0.8s linear infinite;
+}
+@keyframes spin { to { transform: rotate(360deg); } }
+
+/* ===== STAT CARDS ===== */
+.stat-row {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
     gap: 20px;
 }
 
-.card {
-    padding: 20px;
-    border-radius: 16px;
-    color: var(--white);
-    box-shadow: 0 10px 25px rgba(0,0,0,0.08);
-}
-
-.card h5 {
-    font-weight: 500;
-    opacity: 0.9;
-}
-
-.card p {
-    font-size: 34px;
-    font-weight: 700;
-    margin-top: 8px;
-}
-
-/* Card Variants (Maroon Family) */
-.card-primary {
-    background: linear-gradient(
-        135deg,
-        var(--maroon-dark),
-        var(--maroon-primary)
-    );
-}
-
-.card-secondary {
-    background: linear-gradient(
-        135deg,
-        var(--maroon-primary),
-        var(--maroon-light)
-    );
-}
-
-.card-soft {
-    background: linear-gradient(
-        135deg,
-        #9f2d2d,
-        #c0392b
-    );
-}
-
-/* ================= CHART ================= */
-.chart-box {
+.stat-card {
     background: var(--white);
-    margin-top: 30px;
     padding: 20px;
     border-radius: 16px;
-    box-shadow: 0 10px 25px rgba(0,0,0,0.08);
-    border-left: 5px solid var(--maroon-primary);
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.03);
+    border: 1px solid var(--border);
+    transition: transform 0.2s, box-shadow 0.2s;
 }
 
-/* ================= TABLE ================= */
-.table-box {
+.stat-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.06);
+}
+
+.stat-icon {
+    width: 52px;
+    height: 52px;
+    border-radius: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.icon-total { background: #EEF2FF; color: #4338CA; }
+.icon-disetujui { background: var(--success-bg); color: var(--success); }
+.icon-menunggu { background: var(--warning-bg); color: var(--warning); }
+.icon-ditolak { background: var(--danger-bg); color: var(--danger); }
+
+.stat-info { display: flex; flex-direction: column; }
+.stat-num { font-size: 26px; font-weight: 700; color: var(--text-main); line-height: 1.2; }
+.stat-label { font-size: 13px; color: var(--text-soft); font-weight: 500; }
+
+/* ===== GRID: CHART + TABLE ===== */
+.content-grid {
+    display: grid;
+    grid-template-columns: 3fr 2fr;
+    gap: 24px;
+    align-items: start;
+}
+
+.chart-box, .table-box {
     background: var(--white);
-    margin-top: 30px;
-    padding: 20px;
     border-radius: 16px;
-    box-shadow: 0 10px 25px rgba(0,0,0,0.08);
-    border-left: 5px solid var(--maroon-light);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.03);
+    border: 1px solid var(--border);
+    overflow: hidden;
+}
+
+.box-header {
+    padding: 16px 20px;
+    border-bottom: 1px solid var(--border);
+    background: #FAFAFA;
+}
+
+.box-header h4 {
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--text-main);
+}
+
+.chart-container {
+    padding: 20px;
+    height: 300px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* ===== TABLE ===== */
+.table-responsive {
+    overflow-x: auto;
 }
 
 table {
@@ -102,24 +169,55 @@ table {
     border-collapse: collapse;
 }
 
-th {
+th, td {
+    padding: 12px 20px;
+    font-size: 13px;
     text-align: left;
-    color: #64748B;
-    font-weight: 500;
-}
-
-td {
-    padding: 12px 0;
     border-bottom: 1px solid #F1F5F9;
 }
 
-/* ================= STATUS ================= */
-.success {
-    color: var(--success);
+th {
     font-weight: 600;
+    color: var(--text-soft);
+    background: var(--white);
 }
 
-.warning {
-    color: var(--warning);
+.cell-nama {
     font-weight: 600;
+    color: var(--text-main);
+}
+.cell-nik {
+    font-size: 12px;
+    color: var(--text-soft);
+    font-family: monospace;
+    margin-top: 2px;
+}
+
+/* STATUS BADGE */
+.badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    padding: 4px 10px;
+    border-radius: 20px;
+    font-size: 11px;
+    font-weight: 600;
+    white-space: nowrap;
+}
+.badge-menunggu  { background: var(--warning-bg); color: var(--warning); }
+.badge-disetujui { background: var(--success-bg); color: var(--success); }
+.badge-ditolak   { background: var(--danger-bg);  color: var(--danger);  }
+
+/* TEXT SUMMARY */
+.text-berkas {
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--text-soft);
+}
+
+/* RESPONSIVE */
+@media (max-width: 992px) {
+    .content-grid {
+        grid-template-columns: 1fr;
+    }
 }

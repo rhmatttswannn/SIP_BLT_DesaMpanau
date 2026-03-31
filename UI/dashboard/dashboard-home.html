@@ -2,111 +2,107 @@
 <html lang="id">
 <head>
     <meta charset="UTF-8">
-    <title>Dashboard Home</title>
+    <title>Dashboard Home • SIP BLT</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
     <link rel="stylesheet" href="dashboard-home.css">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
 <body>
 
-<div class="cards">
-    <div class="card card-primary">
-        <h5>Total Warga</h5>
-        <p>120</p>
+<div class="page-wrapper">
+
+    <!-- PAGE HEADER -->
+    <div class="page-header">
+        <div class="header-left">
+            <h2>Overview Dashboard</h2>
+            <p>Ringkasan statistik data warga dan pengajuan BLT Desa Mpanau</p>
+        </div>
     </div>
-    <div class="card card-secondary">
-        <h5>Penerima BLT</h5>
-        <p>85</p>
+
+    <!-- LOADING STATE -->
+    <div id="loadingState" class="state-box">
+        <div class="spinner"></div>
+        <p>Memuat data statistik...</p>
     </div>
-    <div class="card card-soft">
-        <h5>Belum Terverifikasi</h5>
-        <p>35</p>
+
+    <div id="dashboardContent" style="display:none;">
+        <!-- STAT CARDS -->
+        <div class="stat-row">
+            <div class="stat-card">
+                <div class="stat-icon icon-total">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+                </div>
+                <div class="stat-info">
+                    <span class="stat-num" id="valTotalWarga">0</span>
+                    <span class="stat-label">Total Pengajuan</span>
+                </div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon icon-disetujui">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+                </div>
+                <div class="stat-info">
+                    <span class="stat-num" id="valDisetujui">0</span>
+                    <span class="stat-label">Disetujui (Penerima)</span>
+                </div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon icon-menunggu">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                </div>
+                <div class="stat-info">
+                    <span class="stat-num" id="valMenunggu">0</span>
+                    <span class="stat-label">Menunggu Verifikasi</span>
+                </div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon icon-ditolak">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="15" y1="9" x2="9" y2="15"/><line x1="9" y1="9" x2="15" y2="15"/></svg>
+                </div>
+                <div class="stat-info">
+                    <span class="stat-num" id="valDitolak">0</span>
+                    <span class="stat-label">Pengajuan Ditolak</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="content-grid">
+            <!-- CHART BOX -->
+            <div class="chart-box">
+                <div class="box-header">
+                    <h4>Grafik Distribusi Status Pengajuan</h4>
+                </div>
+                <div class="chart-container">
+                    <canvas id="bltChart"></canvas>
+                </div>
+            </div>
+
+            <!-- TABLE BOX -->
+            <div class="table-box">
+                <div class="box-header">
+                    <h4>5 Pengajuan Terbaru</h4>
+                </div>
+                <div class="table-responsive">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Nama Lengkap</th>
+                                <th>Status</th>
+                                <th>Berkas</th>
+                            </tr>
+                        </thead>
+                        <tbody id="recentTableBody">
+                            <!-- populated by js -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
     </div>
+
 </div>
 
-<div class="chart-box">
-    <h4>Grafik Distribusi BLT</h4>
-    <canvas id="bltChart" height="120"></canvas>
-</div>
-
-<div class="table-box">
-    <h4>Data Terbaru</h4>
-    <table>
-        <thead>
-            <tr>
-                <th>Nama</th>
-                <th>NIK</th>
-                <th>Status</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <td>Ahmad</td>
-                <td>7201********</td>
-                <td class="success">Penerima</td>
-            </tr>
-            <tr>
-                <td>Siti</td>
-                <td>7201********</td>
-                <td class="warning">Menunggu</td>
-            </tr>
-        </tbody>
-    </table>
-</div>
-
-<script>
-const ctx = document.getElementById('bltChart');
-
-new Chart(ctx, {
-    type: 'bar',
-    data: {
-        labels: [
-            'Total Warga',
-            'Penerima BLT',
-            'Belum Terverifikasi'
-        ],
-        datasets: [{
-            label: 'Jumlah Warga',
-            data: [120, 85, 35],
-            backgroundColor: [
-                '#7b1e1e', // maroon primary
-                '#a52a2a', // maroon light
-                '#c0392b'  // maroon soft / accent
-            ],
-            borderRadius: 8,
-            barThickness: 40
-        }]
-    },
-    options: {
-        responsive: true,
-        plugins: {
-            legend: {
-                display: false
-            }
-        },
-        scales: {
-            y: {
-                beginAtZero: true,
-                grid: {
-                    color: '#E5E7EB'
-                },
-                ticks: {
-                    color: '#475569'
-                }
-            },
-            x: {
-                grid: {
-                    display: false
-                },
-                ticks: {
-                    color: '#475569'
-                }
-            }
-        }
-    }
-});
-</script>
-
+<script src="dashboard-home.js"></script>
 </body>
 </html>

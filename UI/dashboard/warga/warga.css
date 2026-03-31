@@ -95,6 +95,8 @@ button:hover {
     box-shadow: 0 8px 20px rgba(123,30,30,0.25);
 }
 
+
+
 /* ===== TABLE AREA ===== */
 .table-wrapper {
     max-height: 55vh;
@@ -160,6 +162,19 @@ tbody tr:hover {
 
 .active {
     color: var(--success);
+}
+
+.delete-btn{
+    background:#e74c3c;
+    color:white;
+    border:none;
+    padding:6px 10px;
+    border-radius:5px;
+    cursor:pointer;
+}
+
+.delete-btn:hover{
+    background:#c0392b;
 }
 
 /* ===== PAGINATION ===== */

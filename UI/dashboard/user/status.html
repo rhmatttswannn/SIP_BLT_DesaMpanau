@@ -28,10 +28,10 @@
             <i class="fa-regular fa-bell"></i>
             <div class="user">
                 <span>
-                    <b>Ahmad Fauzi</b><br>
+                    <b id="profileName">Loading...</b><br>
                     <small>Penerima Manfaat</small>
                 </span>
-                <div class="avatar">AF</div>
+                <div class="avatar" id="profileAvatar">..</div>
             </div>
         </div>
     </div>
@@ -48,7 +48,7 @@
                 <span>Informasi Pengajuan</span>
             </div>
 
-            <span class="badge success">DITERIMA</span>
+            <span class="badge" id="headerBadge">...</span>
         </div>
 
         <!-- CARD BODY -->
@@ -57,49 +57,35 @@
             <div class="grid">
                 <div class="item">
                     <label>Nama Lengkap</label>
-                    <span>Ahmad Fauzi</span>
+                    <span id="valNama">...</span>
                 </div>
 
                 <div class="item">
                     <label>NIK</label>
-                    <span>3201123456780001</span>
-                </div>
-
-                <div class="item">
-                    <label>Tanggal Pengajuan</label>
-                    <span>12 Januari 2026</span>
+                    <span id="valNik">...</span>
                 </div>
 
                 <div class="item">
                     <label>Status</label>
-                    <span class="status success">
-                        <i class="fa-solid fa-circle"></i> Diterima
-                    </span>
+                    <span class="status" id="valStatus">...</span>
                 </div>
             </div>
 
             <!-- KETERANGAN -->
             <div class="note">
                 <label>Keterangan</label>
-                <p>
-                    Selamat! Pengajuan Anda telah <b>disetujui</b> dan akan segera dicairkan.
-                    Silakan periksa rekening atau titik layanan pencairan terdekat sesuai jadwal
-                    yang telah ditentukan.
-                </p>
+                <p id="noteDesc">Memuat data pengajuan dari server...</p>
             </div>
 
             <!-- FOOTER -->
             <div class="card-footer">
-                <span class="update">
-                    Terakhir diperbarui: 15 Januari 2026, 09:42 WIB
+                <span class="update" id="updateTime">
+                    Terakhir diperbarui: ...
                 </span>
 
                 <div class="actions">
-                    <button class="btn-outline">
-                        <i class="fa-solid fa-download"></i> Unduh Bukti
-                    </button>
-                    <button class="btn-primary">
-                        Hubungi Bantuan
+                    <button class="btn-primary" id="btnPerbarui" style="display:none;" onclick="window.location.href='blt/blt-form.html'">
+                        Perbarui Data
                     </button>
                 </div>
             </div>
@@ -108,6 +94,8 @@
     </div>
 
 </div>
+
+<script src="status.js"></script>
 
 </body>
 </html>

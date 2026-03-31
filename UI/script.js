@@ -16,6 +16,7 @@ document.getElementById("loginForm").addEventListener("submit", async function(e
     }
 
     try {
+
         const response = await fetch(`${API_URL}/api/auth/login`, {
             method: "POST",
             headers: {
@@ -27,28 +28,40 @@ document.getElementById("loginForm").addEventListener("submit", async function(e
         const data = await response.json();
 
         if (!response.ok) {
+
             errorMsg.style.display = "block";
             errorMsg.innerText = data.message || "Login gagal!";
             return;
+
         }
 
-        // Simpan token & role
+        // simpan data user
         localStorage.setItem("token", data.data.token);
         localStorage.setItem("role", data.data.user.role);
+        localStorage.setItem("username", data.data.user.username);
 
-        // Redirect berdasarkan role
+        // redirect
         if (data.data.user.role === "ADMIN") {
+
             window.location.href = "dashboard/dashboard.html";
+
         } else if (data.data.user.role === "USER") {
+
             window.location.href = "dashboard/user/user.html";
+
         } else {
+
             errorMsg.style.display = "block";
             errorMsg.innerText = "Role tidak dikenali!";
+
         }
 
     } catch (error) {
+
         errorMsg.style.display = "block";
         errorMsg.innerText = "Tidak dapat terhubung ke server!";
         console.error(error);
+
     }
+
 });

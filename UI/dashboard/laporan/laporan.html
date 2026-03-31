@@ -4,61 +4,131 @@
     <meta charset="UTF-8">
     <title>Laporan BLT • SIP BLT</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
     <link rel="stylesheet" href="laporan.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <!-- SheetJS untuk export Excel -->
+    <script src="https://cdn.sheetjs.com/xlsx-0.20.1/package/dist/xlsx.full.min.js"></script>
+    
+    <!-- jsPDF & jsPDF-AutoTable untuk export PDF tanpa sentuh backend -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.31/jspdf.plugin.autotable.min.js"></script>
 </head>
 <body>
 
-<div class="container">
+<div class="page-wrapper">
 
-    <!-- HEADER -->
+    <!-- PAGE HEADER -->
     <div class="page-header">
-        <div>
-            <h3>Laporan BLT</h3>
-            <p>Filter dan unduh laporan penerima BLT</p>
+        <div class="header-left">
+            <h2>Laporan BLT</h2>
+            <p>Ringkasan dan cetak laporan data penerima Bantuan Langsung Tunai</p>
+        </div>
+    </div>
+
+    <!-- STAT CARDS -->
+    <div class="stat-row" id="statRow">
+        <div class="stat-card stat-total">
+            <div class="stat-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+            </div>
+            <div class="stat-info">
+                <span class="stat-num" id="statTotal">0</span>
+                <span class="stat-label">Total Pengajuan</span>
+            </div>
+        </div>
+        <div class="stat-card stat-disetujui">
+            <div class="stat-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+            </div>
+            <div class="stat-info">
+                <span class="stat-num" id="statDisetujui">0</span>
+                <span class="stat-label">Disetujui</span>
+            </div>
+        </div>
+        <div class="stat-card stat-menunggu">
+            <div class="stat-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+            </div>
+            <div class="stat-info">
+                <span class="stat-num" id="statMenunggu">0</span>
+                <span class="stat-label">Menunggu</span>
+            </div>
+        </div>
+        <div class="stat-card stat-ditolak">
+            <div class="stat-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="15" y1="9" x2="9" y2="15"/><line x1="9" y1="9" x2="15" y2="15"/></svg>
+            </div>
+            <div class="stat-info">
+                <span class="stat-num" id="statDitolak">0</span>
+                <span class="stat-label">Ditolak</span>
+            </div>
         </div>
     </div>
 
     <!-- TOOLBAR -->
     <div class="toolbar">
         <div class="toolbar-left">
-            <select id="filterStatus">
-                <option value="all">Semua Status</option>
-                <option value="Disetujui">Disetujui</option>
-                <option value="Menunggu">Menunggu</option>
-                <option value="Ditolak">Ditolak</option>
-            </select>
-
-            <button class="btn-outline" onclick="applyFilter()">
-                <i class="fa fa-filter"></i> Filter
-            </button>
+            <!-- Search -->
+            <div class="search-box">
+                <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+                <input type="text" id="searchInput" placeholder="Cari nama atau NIK...">
+            </div>
+            <!-- Filter status -->
+            <div class="filter-group">
+                <label>Status:</label>
+                <select id="filterStatus" onchange="applyFilter()">
+                    <option value="all">Semua</option>
+                    <option value="Disetujui">Disetujui</option>
+                    <option value="Menunggu">Menunggu</option>
+                    <option value="Ditolak">Ditolak</option>
+                </select>
+            </div>
+            <span class="count-label">Menampilkan <b id="countLabel">0</b> data</span>
         </div>
 
         <div class="toolbar-right">
-            <button class="btn-pdf" onclick="exportPDF()">
-                <i class="fa fa-file-pdf"></i> PDF
+            <button class="btn-excel" onclick="exportExcel()" id="btnExcel">
+                <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="9" y1="15" x2="15" y2="15"/><line x1="9" y1="11" x2="15" y2="11"/></svg>
+                Export Excel
             </button>
-            <button class="btn-excel" onclick="exportExcel()">
-                <i class="fa fa-file-excel"></i> Excel
+            <button class="btn-pdf" onclick="exportPDF()" id="btnPdf">
+                <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="9" y1="13" x2="15" y2="13"/><path d="M9 17h1a2 2 0 0 0 0-4H9v4"/></svg>
+                Cetak PDF
             </button>
         </div>
     </div>
 
-    <!-- TABLE -->
+    <!-- TABLE CARD -->
     <div class="table-card">
-        <table>
-            <thead>
-                <tr>
-                    <th><input type="checkbox" onclick="toggleAll(this)"></th>
-                    <th>Nama</th>
-                    <th>NIK</th>
-                    <th>Nominal</th>
-                    <th>Status</th>
-                </tr>
-            </thead>
-            <tbody id="laporanTable"></tbody>
-        </table>
+        <!-- LOADING STATE -->
+        <div id="loadingState" class="state-box">
+            <div class="spinner"></div>
+            <p>Memuat data laporan...</p>
+        </div>
+
+        <!-- EMPTY STATE -->
+        <div id="emptyState" class="state-box" style="display:none;">
+            <svg class="empty-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/><line x1="12" y1="11" x2="12" y2="17"/><line x1="9" y1="14" x2="15" y2="14"/></svg>
+            <p>Tidak ada data ditemukan</p>
+            <small>Coba ubah filter atau kata kunci pencarian</small>
+        </div>
+
+        <!-- TABLE -->
+        <div id="tableContainer" style="display:none;">
+            <table id="laporanTable">
+                <thead>
+                    <tr>
+                        <th>No</th>
+                        <th>Nama Lengkap</th>
+                        <th>NIK</th>
+                        <th>Alamat</th>
+                        <th>Kelengkapan Berkas</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+                <tbody id="laporanBody"></tbody>
+            </table>
+        </div>
     </div>
 
 </div>
