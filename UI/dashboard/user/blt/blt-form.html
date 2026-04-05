@@ -10,6 +10,7 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 
 <link rel="stylesheet" href="blt-form.css">
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
 
 <body>
@@ -28,7 +29,7 @@ Silakan isi data berikut untuk pengajuan Bantuan Langsung Tunai.
   ✅ Pengajuan berhasil dikirim. Silakan tunggu verifikasi dari admin.
 </div>
 
-<form id="userBLTForm" enctype="multipart/form-data">
+<form id="userBLTForm" enctype="multipart/form-data" onsubmit="return false;">
 
 <!-- ALAMAT -->
 <div class="field">
@@ -60,7 +61,7 @@ Silakan isi data berikut untuk pengajuan Bantuan Langsung Tunai.
 <input type="file" name="fotoDapur" accept="image/*" required>
 </div>
 
-<button type="submit" class="btn-submit">
+<button type="button" id="submitBtn" class="btn-submit">
 Kirim Pengajuan
 <i class="fa-solid fa-arrow-right"></i>
 </button>

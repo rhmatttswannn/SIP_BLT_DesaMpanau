@@ -10,6 +10,11 @@ if (!token) {
     window.location.href = "../../../index.html";
 }
 
+// Cegah manipulasi/membuka iframe secara langsung 
+if (window.self === window.top) {
+    window.location.href = "../user.html";
+}
+
 // Cek status warga saat form dibuka
 window.addEventListener("load", async () => {
     try {
@@ -48,8 +53,52 @@ window.addEventListener("load", async () => {
     }
 });
 
-form.addEventListener("submit", async (e) => {
-    e.preventDefault();
+const btnSubmit = document.getElementById("submitBtn");
+
+btnSubmit.addEventListener("click", async (e) => {
+    // Validasi HTML5 wajib jalan sebelum dikirim
+    if (!form.checkValidity()) {
+        form.reportValidity();
+        return;
+    }
+
+    // --- OPTIMASI: Validasi ukuran dan tipe file di sisi klien (Frontend) ---
+    const maxMB = 2;
+    const maxBytes = maxMB * 1024 * 1024;
+    const fileInputs = [
+        { el: form.fotoKtp, label: "Foto KTP" },
+        { el: form.fotoKk, label: "Foto KK" },
+        { el: form.fotoRumah, label: "Foto Rumah" },
+        { el: form.fotoDapur, label: "Foto Dapur" }
+    ];
+
+    for (let item of fileInputs) {
+        if (item.el.files && item.el.files.length > 0) {
+            const file = item.el.files[0];
+            
+            // Cek ukuran
+            if (file.size > maxBytes) {
+                Swal.fire({
+                    icon: "warning",
+                    title: "Ukuran Terlalu Besar",
+                    text: `${item.label} (${(file.size / (1024 * 1024)).toFixed(2)} MB) melebihi batas maksimal ${maxMB} MB. Silakan kompres gambar Anda terlebih dahulu.`,
+                    confirmButtonColor: "#7b1e1e"
+                });
+                return; // Stop proses pengiriman
+            }
+
+            // Cek format gambar
+            if (!file.type.startsWith("image/")) {
+                Swal.fire({
+                    icon: "warning",
+                    title: "Format Tidak Sesuai",
+                    text: `${item.label} harus berupa file gambar (JPG/PNG).`,
+                    confirmButtonColor: "#7b1e1e"
+                });
+                return; // Stop proses pengiriman
+            }
+        }
+    }
 
     const formData = new FormData();
     formData.append("address", form.address.value);
@@ -73,19 +122,41 @@ form.addEventListener("submit", async (e) => {
             body: formData
         });
 
-        const result = await res.json();
+        // Coba tangkap response json dari server
+        let result;
+        try {
+            result = await res.json();
+        } catch (e) {
+            // Jika crash/format HTML dari nginx/multer yg tidak dihandle, fallback
+            throw new Error("Gagal membaca respons dari server. Pastikan ukuran file Anda tidak terlalu besar.");
+        }
 
         if (res.ok) {
             form.style.display = "none";
             successBox.style.display = "block";
             successBox.style.color = "green";
             successBox.innerHTML = `✅ Pengajuan berhasil dikirim. Silakan tunggu verifikasi dan pantau di menu Status Pengajuan.`;
+            
+            Swal.fire({
+                icon: "success",
+                title: "Berhasil",
+                text: "Data pengajuan Anda berhasil diunggah!",
+                timer: 2000,
+                showConfirmButton: false
+            });
         } else {
-            alert(result.message);
+            // Jika res tidak ok (400, 413, 500 dll)
+            throw new Error(result.message || "Terjadi kesalahan saat mengunggah formulir.");
         }
 
     } catch (error) {
         console.error("Upload error:", error);
+        Swal.fire({
+            icon: "error",
+            title: "Pengajuan Gagal",
+            text: error.message || "Tidak dapat terhubung ke server.",
+            confirmButtonColor: "#7b1e1e"
+        });
     } finally {
         btn.innerHTML = origText;
         btn.disabled = false;
