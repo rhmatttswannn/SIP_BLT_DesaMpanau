@@ -2,41 +2,24 @@
 <html lang="id">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Status Pengajuan BLT</title>
 
-    <!-- Font -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-
-    <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-
-    <!-- CSS -->
     <link rel="stylesheet" href="status.css">
 </head>
 <body>
 
 <div class="page-container">
 
-    <!-- TOP BAR -->
-    <div class="top-bar">
-        <div class="top-left">
-            <h2>Status Pengajuan BLT</h2>
-            <p>Pantau status pengajuan bantuan Anda secara real-time</p>
-        </div>
-
-        <div class="top-right">
-            <i class="fa-regular fa-bell"></i>
-            <div class="user">
-                <span>
-                    <b id="profileName">Loading...</b><br>
-                    <small>Penerima Manfaat</small>
-                </span>
-                <div class="avatar" id="profileAvatar">..</div>
-            </div>
-        </div>
+    <!-- JUDUL HALAMAN -->
+    <div class="page-title">
+        <h2>Status Pengajuan BLT</h2>
+        <p>Pantau status pengajuan bantuan Anda secara real-time</p>
     </div>
 
-    <!-- CARD -->
+    <!-- KARTU STATUS -->
     <div class="status-card">
 
         <!-- CARD HEADER -->
@@ -47,7 +30,6 @@
                 </div>
                 <span>Informasi Pengajuan</span>
             </div>
-
             <span class="badge" id="headerBadge">...</span>
         </div>
 
@@ -79,12 +61,12 @@
 
             <!-- FOOTER -->
             <div class="card-footer">
-                <span class="update" id="updateTime">
-                    Terakhir diperbarui: ...
-                </span>
+                <span class="update" id="updateTime">Terakhir diperbarui: ...</span>
 
                 <div class="actions">
-                    <button class="btn-primary" id="btnPerbarui" style="display:none;" onclick="window.location.href='blt/blt-form.html'">
+                    <button class="btn-primary" id="btnPerbarui" style="display:none;"
+                        onclick="window.parent.loadPage('blt/blt-form.html', window.parent.document.getElementById('menuPengajuan'))">
+                        <i class="fa-solid fa-rotate-right"></i>
                         Perbarui Data
                     </button>
                 </div>
@@ -96,6 +78,5 @@
 </div>
 
 <script src="status.js"></script>
-
 </body>
 </html>

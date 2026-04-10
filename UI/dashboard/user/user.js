@@ -10,18 +10,13 @@ const API_URL = "http://localhost:8000";
 async function validateUser() {
     try {
         const res = await fetch(`${API_URL}/api/auth/me`, {
-            headers: {
-                "Authorization": `Bearer ${token}`
-            }
+            headers: { "Authorization": `Bearer ${token}` }
         });
 
         if (!res.ok) throw new Error();
 
         const data = await res.json();
-
-        if (data.data.role !== "USER") {
-            throw new Error();
-        }
+        if (data.data.role !== "USER") throw new Error();
 
     } catch (err) {
         localStorage.clear();
@@ -31,20 +26,34 @@ async function validateUser() {
 
 validateUser();
 
-
+/* ===== NAVIGASI HALAMAN ===== */
 function loadPage(page, element) {
     const iframe = document.getElementById('contentFrame');
     iframe.src = page;
 
-    // remove active
-    document.querySelectorAll('.menu li').forEach(li => {
-        li.classList.remove('active');
-    });
-
-    // add active
+    document.querySelectorAll('.menu li').forEach(li => li.classList.remove('active'));
     element.classList.add('active');
+
+    // Tutup sidebar otomatis di mobile
+    closeSidebar();
 }
 
+/* ===== SIDEBAR MOBILE ===== */
+function toggleSidebar() {
+    const sidebar = document.getElementById('sidebar');
+    const overlay = document.getElementById('sidebarOverlay');
+    sidebar.classList.toggle('open');
+    overlay.classList.toggle('active');
+}
+
+function closeSidebar() {
+    const sidebar = document.getElementById('sidebar');
+    const overlay = document.getElementById('sidebarOverlay');
+    sidebar.classList.remove('open');
+    overlay.classList.remove('active');
+}
+
+/* ===== LOGOUT ===== */
 async function logout() {
     const result = await Swal.fire({
         title: "Yakin ingin logout?",
@@ -63,4 +72,3 @@ async function logout() {
         window.location.href = "../../index.html";
     }
 }
-

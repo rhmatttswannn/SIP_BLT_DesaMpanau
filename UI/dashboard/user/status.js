@@ -28,11 +28,6 @@ async function fetchStatus() {
         const wargaData = await wargaRes.json();
         const w = wargaData.data;
 
-        // --- UPDATE PROFILE (TOP BAR) ---
-        document.getElementById("profileName").innerText = w.nama || meData.data.username;
-        const initials = (w.nama || meData.data.username).substring(0,2).toUpperCase();
-        document.getElementById("profileAvatar").innerText = initials;
-
         // --- UPDATE STATUS CARD ---
         const badge = document.getElementById("headerBadge");
         const valNama = document.getElementById("valNama");
@@ -56,11 +51,11 @@ async function fetchStatus() {
             noteDesc.innerHTML = `Selamat! Pengajuan Anda telah <b>Disetujui</b> dan akan segera dicairkan. Silakan menunggu informasi lebih lanjut dari desa.`;
         } else if (w.status === "Ditolak") {
             badge.className = "badge";
-            badge.style.background = "var(--danger-bg)";
-            badge.style.color = "var(--danger)";
+            badge.style.background = "#FEE2E2";
+            badge.style.color = "#DC2626";
             badge.innerText = "DITOLAK";
             valStatus.className = "status";
-            valStatus.style.color = "var(--danger)";
+            valStatus.style.color = "#DC2626";
             valStatus.innerHTML = `<i class="fa-solid fa-circle"></i> Ditolak`;
             
             // Catatan penolakan

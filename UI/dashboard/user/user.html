@@ -3,75 +3,71 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dashboard Admin • SIP BLT</title>
+    <title>Dashboard Warga • BLT Desa Mpanau</title>
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-
-
-    <!-- Google Font -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-
-    <!-- Chart JS -->
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-
-    <!-- SweetAlert2 -->
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-
     <link rel="stylesheet" href="user.css">
 </head>
 <body>
 
-<!-- SIDEBAR -->
-<aside class="sidebar">
+<div class="app-shell">
 
-    <div class="sidebar-header">
-        <div class="logo-wrapper">
-            <img src="../../assets/img/logo.png" alt="Logo">
+    <!-- SIDEBAR -->
+    <aside class="sidebar" id="sidebar">
+        <div class="sidebar-header">
+            <div class="logo-wrapper">
+                <img src="../../assets/img/logo.png" alt="Logo BLT">
+            </div>
+            <h3>BANTUAN LANGSUNG TUNAI</h3>
+            <p>PEMDES MPANAU</p>
         </div>
-        <h3>BANTUAN LANGSUNG TUNAI</h3>
-        <p>PEMDES MPANAU</p>
+
+        <ul class="menu">
+            <li id="menuPengajuan" onclick="loadPage('blt/blt-form.html', this)" class="active">
+                <i class="fa-solid fa-file-circle-plus"></i>
+                <span>Pengajuan BLT</span>
+            </li>
+
+            <li id="menuStatus" onclick="loadPage('status.html', this)">
+                <i class="fa-solid fa-clipboard-check"></i>
+                <span>Status Pengajuan</span>
+            </li>
+
+            <li class="logout" onclick="logout()">
+                <i class="fa-solid fa-arrow-right-from-bracket"></i>
+                <span>Logout</span>
+            </li>
+        </ul>
+    </aside>
+
+    <!-- OVERLAY (backdrop saat sidebar terbuka di mobile) -->
+    <div class="sidebar-overlay" id="sidebarOverlay" onclick="closeSidebar()"></div>
+
+    <!-- MAIN -->
+    <div class="main">
+
+        <!-- NAVBAR (hanya tampil di mobile) -->
+        <nav class="navbar">
+            <button class="menu-toggle" onclick="toggleSidebar()" aria-label="Buka menu">
+                <i class="fa-solid fa-bars"></i>
+            </button>
+            <span class="navbar-title">BLT Desa Mpanau</span>
+            <i class="fa-solid fa-circle-user" style="font-size:24px; color:#7b1e1e;"></i>
+        </nav>
+
+        <!-- CONTENT -->
+        <section class="content">
+            <iframe
+                id="contentFrame"
+                src="blt/blt-form.html"
+                frameborder="0"
+                allowfullscreen>
+            </iframe>
+        </section>
+
     </div>
-
-    <ul class="menu">
-        <!-- <li onclick="loadPage('dashboard-home.html', this)" class="active">
-            <i class="fa-solid fa-house"></i>
-            <span>Dashboard</span>
-        </li> -->
-
-        <li onclick="loadPage('blt/blt-form.html', this)">
-            <i class="fa-solid fa-file-circle-plus"></i>
-            <span>Pengajuan BLT</span>
-        </li>
-
-        <li onclick="loadPage('status.html', this)">
-            <i class="fa-solid fa-clipboard-check"></i>
-            <span>Status Pengajuan</span>
-        </li>
-
-        <li class="logout" onclick="logout()">
-            <i class="fa-solid fa-arrow-right-from-bracket"></i>
-            <span>Logout</span>
-        </li>
-    </ul>
-
-</aside>
-
-
-<!-- MAIN -->
-<div class="main">
-
-
-    <!-- CONTENT -->
-<section class="content">
-
-    <!-- IFRAME CONTENT -->
-    <iframe 
-        id="contentFrame"
-        src="blt/blt-form.html"
-        frameborder="0">
-    </iframe>
-
-</section>
 
 </div>
 
