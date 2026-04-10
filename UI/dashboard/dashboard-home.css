@@ -221,3 +221,20 @@ th {
         grid-template-columns: 1fr;
     }
 }
+
+@media (max-width: 600px) {
+    .page-wrapper { padding: 14px; gap: 16px; }
+    .stat-row { grid-template-columns: repeat(2, 1fr); gap: 12px; }
+    .stat-num { font-size: 22px; }
+    .stat-card { padding: 14px; gap: 12px; }
+    .stat-icon { width: 40px; height: 40px; border-radius: 10px; }
+    .chart-container { height: 220px; }
+    .box-header h4 { font-size: 13px; }
+    th, td { padding: 10px 12px; font-size: 12px; }
+}
+
+@media (max-width: 400px) {
+    .stat-row { grid-template-columns: 1fr 1fr; gap: 8px; }
+    .stat-card { padding: 12px 10px; }
+    .stat-label { font-size: 11px; }
+}

@@ -158,10 +158,21 @@ iframe {
 @media (max-width: 768px) {
     .sidebar {
         left: -260px;
+        z-index: 1000;
     }
 
     .sidebar.active {
         left: 0;
+    }
+
+    /* Overlay gelap saat sidebar terbuka */
+    .sidebar.active::after {
+        content: '';
+        position: fixed;
+        inset: 0;
+        background: rgba(0,0,0,0.4);
+        z-index: -1;
+        left: 260px;
     }
 
     .main {
@@ -172,4 +183,29 @@ iframe {
     .menu-toggle {
         display: block;
     }
+
+    .navbar {
+        padding: 0 14px;
+    }
+
+    .content {
+        padding: 12px;
+    }
+
+    iframe {
+        height: calc(100vh - 60px - 24px);
+        border-radius: 10px;
+    }
+}
+
+@media (max-width: 480px) {
+    .sidebar {
+        width: 220px;
+        left: -220px;
+    }
+    .sidebar.active::after {
+        left: 220px;
+    }
+    .sidebar-header h3 { font-size: 10px; }
+    .menu li { font-size: 13px; padding: 12px 14px; }
 }

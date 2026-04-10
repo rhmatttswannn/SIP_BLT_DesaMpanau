@@ -1,37 +1,51 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
 * {
     box-sizing: border-box;
+    margin: 0;
+    padding: 0;
     font-family: 'Inter', sans-serif;
 }
 
 body {
-    margin: 0;
     background: #F8FAFC;
+    overflow: hidden; /* Cegah scroll body, scroll ada di iframe */
 }
+
+/* ===== LAYOUT SHELL ===== */
+.app-shell {
+    display: flex;
+    height: 100vh;
+    width: 100%;
+    overflow: hidden;
+}
+
 /* ===== SIDEBAR ===== */
 .sidebar {
     width: 260px;
     height: 100vh;
     background: linear-gradient(180deg, #7F1D1D, #7A1A1A);
     color: #fff;
-    position: fixed;
-    top: 0;
-    left: 0;
+    flex-shrink: 0;
     display: flex;
     flex-direction: column;
-    padding: 24px 0;
+    transition: transform 0.3s ease;
+    overflow-y: auto;
+    z-index: 200;
 }
 
 /* HEADER */
 .sidebar-header {
     text-align: center;
-    padding: 0 24px 24px;
+    padding: 24px 24px 20px;
     border-bottom: 1px solid rgba(255,255,255,0.15);
+    flex-shrink: 0;
 }
 
 .logo-wrapper {
-    width: 80px;
-    height: 80px;
-    margin: 0 auto 14px;
+    width: 72px;
+    height: 72px;
+    margin: 0 auto 12px;
     border-radius: 50%;
     background: #fff;
     display: flex;
@@ -40,15 +54,14 @@ body {
 }
 
 .logo-wrapper img {
-    width: 48px;
+    width: 44px;
 }
 
-
 .sidebar-header h3 {
-    font-size: 12px;
+    font-size: 11px;
     font-weight: 700;
     letter-spacing: 0.8px;
-    margin: 0;
+    text-transform: uppercase;
 }
 
 .sidebar-header p {
@@ -60,75 +73,164 @@ body {
 /* MENU */
 .menu {
     list-style: none;
-    padding: 20px 12px;
-    margin: 0;
+    padding: 16px 12px;
     flex: 1;
 }
 
 .menu li {
     display: flex;
     align-items: center;
-    gap: 14px;
-    padding: 14px 18px;
+    gap: 12px;
+    padding: 13px 16px;
     border-radius: 10px;
     cursor: pointer;
     font-size: 14px;
     color: #FEE2E2;
-    transition: background 0.25s ease;
-    margin-bottom: 6px;
+    transition: background 0.2s ease;
+    margin-bottom: 4px;
+    position: relative;
 }
 
-/* HOVER */
 .menu li:hover {
     background: rgba(255,255,255,0.12);
 }
 
-/* ACTIVE MENU */
 .menu li.active {
     background: rgba(255,255,255,0.18);
     color: #fff;
-    position: relative;
 }
 
-/* GARIS PUTIH KIRI */
 .menu li.active::before {
     content: '';
     position: absolute;
-    left: -6px;
+    left: 0;
     top: 8px;
     bottom: 8px;
-    width: 4px;
+    width: 3px;
     background: #fff;
-    border-radius: 6px;
+    border-radius: 0 4px 4px 0;
 }
 
-/* LOGOUT */
 .menu li.logout {
-    margin-top: auto;
     color: #FECACA;
+    margin-top: 8px;
 }
 
 .menu li.logout:hover {
-    background: rgba(255,255,255,0.15);
+    background: rgba(255,100,100,0.15);
 }
 
-/* MAIN */
+/* ===== MAIN AREA ===== */
 .main {
-    margin-left: 260px;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
     height: 100vh;
+    overflow: hidden;
+    min-width: 0; /* Penting untuk mencegah overflow */
+}
+
+/* ===== NAVBAR (hanya tampil di mobile) ===== */
+.navbar {
+    height: 52px;
+    background: #fff;
+    padding: 0 16px;
+    display: none; /* HIDDEN di desktop */
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 1px solid #E5E7EB;
+    flex-shrink: 0;
+    z-index: 100;
+}
+
+.navbar-title {
+    font-size: 14px;
+    font-weight: 600;
+    color: #374151;
+}
+
+/* HAMBURGER */
+.menu-toggle {
+    width: 36px;
+    height: 36px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #FEF2F2;
+    border: none;
+    border-radius: 8px;
+    color: #7b1e1e;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+/* ===== OVERLAY (mobile saat sidebar terbuka) ===== */
+.sidebar-overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.45);
+    z-index: 150;
+}
+
+.sidebar-overlay.active {
+    display: block;
+}
+
+/* ===== CONTENT & IFRAME ===== */
+.content {
+    flex: 1;
+    overflow: hidden;
     display: flex;
     flex-direction: column;
 }
 
-/* CONTENT */
-.content {
-    flex: 1;
-    background: #F8FAFC;
-}
-
-iframe {
+iframe#contentFrame {
     width: 100%;
-    height: 100%;
+    flex: 1;
     border: none;
     background: #F8FAFC;
+    display: block;
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 768px) {
+    .app-shell {
+        position: relative;
+    }
+
+    /* Sidebar sliding dari kiri */
+    .sidebar {
+        position: fixed;
+        top: 0;
+        left: 0;
+        height: 100vh;
+        transform: translateX(-100%);
+        z-index: 200;
+    }
+
+    .sidebar.open {
+        transform: translateX(0);
+    }
+
+    /* Tampilkan navbar di mobile */
+    .navbar {
+        display: flex;
+    }
+
+    .main {
+        width: 100%;
+    }
+
+    iframe#contentFrame {
+        height: calc(100vh - 52px);
+    }
+}
+
+@media (max-width: 480px) {
+    .sidebar { width: 240px; }
+    .logo-wrapper { width: 60px; height: 60px; }
+    .logo-wrapper img { width: 36px; }
+    .sidebar-header h3 { font-size: 10px; }
+    .menu li { font-size: 13px; padding: 12px 14px; }
 }
