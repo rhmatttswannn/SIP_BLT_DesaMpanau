@@ -201,6 +201,7 @@ async function openModal(wargaId) {
 
     // Info
     document.getElementById("modalAlamat").textContent   = selectedWarga.address || "-";
+    document.getElementById("modalNomorHp").textContent  = selectedWarga.nomorHp || "-";
     document.getElementById("modalStatusBadge").innerHTML = renderBadge(selectedWarga.status);
 
     // Foto dokumen
@@ -231,12 +232,23 @@ function renderDocPreview(elId, filePath, iconClass, label) {
         const imgUrl = `${API_URL}/${normalPath}`;
 
         el.classList.add("has-img");
-        el.innerHTML = `
-            <img src="${imgUrl}"
-                alt="${label}"
-                onerror="this.parentElement.innerHTML='<i class=\\'fa-solid ${iconClass} doc-icon\\'></i><span>${label}</span><small style=\\'font-size:11px;color:#94A3B8;\\'>Foto tidak dapat dimuat</small>';this.parentElement.classList.remove('has-img');">
-            <div class="doc-img-overlay"><i class="fa-solid fa-eye"></i></div>
-        `;
+        el.innerHTML = "";
+
+        const img = document.createElement("img");
+        img.src = imgUrl; // Otomatis URL encoding oleh browser
+        img.alt = label;
+        img.onerror = function() {
+            el.innerHTML = `<i class="fa-solid ${iconClass} doc-icon"></i><span>${label}</span><small style="font-size:11px;color:#94A3B8;">Foto tidak dapat dimuat</small>`;
+            el.classList.remove("has-img");
+        };
+
+        const overlay = document.createElement("div");
+        overlay.className = "doc-img-overlay";
+        overlay.innerHTML = `<i class="fa-solid fa-eye"></i>`;
+
+        el.appendChild(img);
+        el.appendChild(overlay);
+
         // aktifkan klik lihat gambar
         if (parentEl) {
             parentEl.dataset.hasImg = "true";

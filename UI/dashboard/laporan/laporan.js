@@ -168,7 +168,10 @@ function showTable() {
 /* ============================================================
    EXPORT PDF — generate di frontend dengan jsPDF
    ============================================================ */
-function exportPDF() {
+/* ============================================================
+   EXPORT PDF — generate dari backend
+   ============================================================ */
+async function exportPDF() {
     if (filtered.length === 0) {
         Swal.fire({ icon: "warning", title: "Data kosong", text: "Tidak ada data untuk diekspor.", confirmButtonColor: "#7b1e1e" });
         return;
@@ -177,44 +180,33 @@ function exportPDF() {
     const btn = document.getElementById("btnPdf");
     const origText = btn.innerHTML;
     btn.disabled = true;
-    btn.innerHTML = `<span class="btn-loading"></span> Menyiapkan PDF...`;
+    btn.innerHTML = `<span class="btn-loading"></span> Mengunduh PDF...`;
 
     try {
-        const { jsPDF } = window.jspdf;
-        const doc = new jsPDF();
-
-        // Judul Dokumen
-        doc.setFontSize(16);
-        doc.text("Laporan Data Warga (BLT)", 105, 15, { align: "center" });
-        doc.setFontSize(10);
-        const tglCetak = new Date().toLocaleDateString("id-ID", { day: 'numeric', month: 'long', year: 'numeric' });
-        doc.text(`Tanggal Dicetak: ${tglCetak}`, 105, 22, { align: "center" });
-
-        // Generate data baris tabel
-        const tableBody = filtered.map((w, idx) => [
-            idx + 1,
-            w.nik,
-            w.nama,
-            w.address || "-",
-            w.status
-        ]);
-
-        // AutoTable plugin
-        doc.autoTable({
-            startY: 30,
-            head: [['No', 'NIK', 'Nama Lengkap', 'Alamat', 'Status']],
-            body: tableBody,
-            headStyles: { fillColor: [123, 30, 30] }, // Warna merah maroon
-            theme: 'striped',
-            styles: { fontSize: 9 }
+        const res = await fetch(`${API_URL}/api/warga/export/pdf`, {
+            method: "GET",
+            headers: {
+                "Authorization": `Bearer ${token}`
+            }
         });
 
-        // Unduh File
-        doc.save(`Laporan_BLT_${formatTanggalFile()}.pdf`);
+        if (!res.ok) {
+            throw new Error("Gagal mengunduh file dari server");
+        }
+
+        const blob = await res.blob();
+        const url = window.URL.createObjectURL(blob);
+        const a = document.createElement("a");
+        a.href = url;
+        a.download = `Laporan_BLT_${formatTanggalFile()}.pdf`;
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+        window.URL.revokeObjectURL(url);
 
     } catch (err) {
         console.error(err);
-        Swal.fire({ icon: "error", title: "Gagal", text: "Tidak dapat membuat file PDF.", confirmButtonColor: "#7b1e1e" });
+        Swal.fire({ icon: "error", title: "Gagal", text: "Tidak dapat mengunduh file PDF dari server.", confirmButtonColor: "#7b1e1e" });
     } finally {
         btn.disabled  = false;
         btn.innerHTML = origText;
