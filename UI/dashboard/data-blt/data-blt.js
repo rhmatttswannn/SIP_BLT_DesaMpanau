@@ -201,7 +201,7 @@ async function openModal(wargaId) {
 
     // Info
     document.getElementById("modalAlamat").textContent   = selectedWarga.address || "-";
-    document.getElementById("modalNomorHp").textContent  = selectedWarga.nomorHp || "-";
+    document.getElementById("modalNomorHp").textContent  = selectedWarga.noHp || "-";
     document.getElementById("modalStatusBadge").innerHTML = renderBadge(selectedWarga.status);
 
     // Foto dokumen

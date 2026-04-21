@@ -102,7 +102,7 @@ btnSubmit.addEventListener("click", async (e) => {
 
     const formData = new FormData();
     formData.append("address", form.address.value);
-    formData.append("nomorHp", form.nomorHp.value);
+    formData.append("noHp", form.noHp.value);
     formData.append("fotoKtp", form.fotoKtp.files[0]);
     formData.append("fotoKk", form.fotoKk.files[0]);
     formData.append("fotoRumah", form.fotoRumah.files[0]);
